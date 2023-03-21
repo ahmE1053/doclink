@@ -1,0 +1,60 @@
+import 'package:flutter/material.dart';
+
+import '../../core/consts/apptypography.dart';
+
+enum ListTilePlace {
+  middle,
+  last,
+}
+
+class MyListTile extends StatelessWidget {
+  const MyListTile({
+    super.key,
+    required this.tilePlace,
+    required this.title,
+    required this.subtitle,
+    required this.tileColor,
+    this.textColor,
+    this.onTap,
+  });
+
+  final ListTilePlace tilePlace;
+  final String title, subtitle;
+  final void Function()? onTap;
+  final middleBorderRadius = BorderRadius.zero;
+  final lastBorderRadius = const BorderRadius.only(
+    bottomRight: Radius.circular(25),
+    bottomLeft: Radius.circular(25),
+  );
+  final Color? textColor;
+  final Color tileColor;
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      textColor: textColor,
+      tileColor: tileColor,
+      onTap: onTap,
+      title: FittedBox(
+        alignment: AlignmentDirectional.centerStart,
+        fit: BoxFit.scaleDown,
+        child: Text(
+          title,
+          style: AppTypography.semiHeadlineSize(context),
+        ),
+      ),
+      subtitle: FittedBox(
+        alignment: AlignmentDirectional.centerStart,
+        fit: BoxFit.scaleDown,
+        child: Text(
+          subtitle,
+          style: AppTypography.bodySize(context),
+        ),
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: tilePlace == ListTilePlace.middle
+            ? middleBorderRadius
+            : lastBorderRadius,
+      ),
+    );
+  }
+}
