@@ -6,9 +6,11 @@ part 'doctor.g.dart';
 
 @freezed
 class Doctor with _$Doctor {
+  @JsonSerializable(explicitToJson: true)
   const factory Doctor({
     required String id,
     required String name,
+    required String imageUrl,
     required String speciality,
     required String aboutDoctor,
     required DateTime joinedOn,
@@ -21,16 +23,12 @@ class Doctor with _$Doctor {
   factory Doctor.fromJson(Map<String, Object?> json) => _$DoctorFromJson(json);
 }
 
-@JsonSerializable()
-class Review {
-  final double rating;
-  final String review;
-
-  const Review({required this.rating, required this.review});
+@freezed
+class Review with _$Review {
+  const factory Review({required double rating, required String review}) =
+      _Review;
 
   factory Review.fromJson(Map<String, Object?> json) => _$ReviewFromJson(json);
-
-  Map<String, Object?> toJson() => _$ReviewToJson(this);
 }
 
 enum DoctorState {
@@ -39,67 +37,50 @@ enum DoctorState {
   offline,
 }
 
-@JsonSerializable()
-class DoctorAvailability {
-  final bool offline, online;
-  final List<OnlineAvailability> onlineAvailability;
-  final List<OfflineAvailability> offlineAvailability;
-
-  const DoctorAvailability({
-    required this.online,
-    required this.offline,
-    required this.onlineAvailability,
-    required this.offlineAvailability,
-  });
+@freezed
+class DoctorAvailability with _$DoctorAvailability {
+  @JsonSerializable(explicitToJson: true)
+  const factory DoctorAvailability({
+    required bool online,
+    required bool offline,
+    List<OnlineAvailability>? onlineAvailability,
+    List<OfflineAvailability>? offlineAvailability,
+  }) = _DoctorAvailability;
 
   factory DoctorAvailability.fromJson(Map<String, Object?> json) =>
       _$DoctorAvailabilityFromJson(json);
-
-  Map<String, Object?> toJson() => _$DoctorAvailabilityToJson(this);
 }
 
-@JsonSerializable()
-class OnlineAvailability {
-  final DateTime day;
-  final List<TimeInDayOnline> timesAvailable;
-
-  const OnlineAvailability({required this.day, required this.timesAvailable});
+@freezed
+class OnlineAvailability with _$OnlineAvailability {
+  @JsonSerializable(explicitToJson: true)
+  const factory OnlineAvailability(
+      {required DateTime day,
+      required List<TimeInDayOnline> timesAvailable}) = _OnlineAvailability;
 
   factory OnlineAvailability.fromJson(Map<String, Object?> json) =>
       _$OnlineAvailabilityFromJson(json);
-
-  Map<String, Object?> toJson() => _$OnlineAvailabilityToJson(this);
 }
 
-@JsonSerializable()
-class TimeInDayOnline {
-  final String timeOfDay;
-  final bool available;
-
-  const TimeInDayOnline({
-    required this.timeOfDay,
-    required this.available,
-  });
+@freezed
+class TimeInDayOnline with _$TimeInDayOnline {
+  const factory TimeInDayOnline({
+    required String timeOfDay,
+    required bool available,
+  }) = _TimeInDayOnline;
 
   factory TimeInDayOnline.fromJson(Map<String, Object?> json) =>
       _$TimeInDayOnlineFromJson(json);
-
-  Map<String, Object?> toJson() => _$TimeInDayOnlineToJson(this);
 }
 
-@JsonSerializable()
-class OfflineAvailability {
-  final DateTime day;
-  final String timeFrom, timeTo;
-
-  const OfflineAvailability({
-    required this.day,
-    required this.timeFrom,
-    required this.timeTo,
-  });
+@freezed
+class OfflineAvailability with _$OfflineAvailability {
+  const factory OfflineAvailability({
+    required DateTime day,
+    required String timeFrom,
+    required String timeTo,
+  }) = _OfflineAvailability;
 
   factory OfflineAvailability.fromJson(Map<String, Object?> json) =>
       _$OfflineAvailabilityFromJson(json);
-
-  Map<String, Object?> toJson() => _$OfflineAvailabilityToJson(this);
 }

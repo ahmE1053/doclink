@@ -1,3 +1,8 @@
+import 'package:doclink/core/utilities/specialties_map.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final testPageTextField = StateProvider((ref) => '');
+final homeSearchTextField = StateProvider((ref) => '');
+
+final specialtiesSearchTextField = StateProvider((ref) => '');
+
+final specialtiesSearchResults = StateProvider((ref) => medicalSpecialties);

@@ -1,13 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:doclink/core/consts/apptypography.dart';
+import 'package:doclink/core/consts/app_typography.dart';
 import 'package:doclink/core/providers/auth_provider.dart';
 import 'package:doclink/core/providers/router_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../data/data source/remote_date_source.dart';
+import '../../data/data source/patient_remote_date_source.dart';
 import '../widgets/my_list_tile.dart';
 
 class ProfileScreen extends HookConsumerWidget {
@@ -17,36 +18,11 @@ class ProfileScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final userInfo = ref.watch(remoteDataSourceProvider).value!;
     final authInfo = ref.watch(authenticationProvider)!;
+    print(authInfo);
     final mq = MediaQuery.of(context).size;
     final theme = Theme.of(context);
-    final listOfSetting = [
-      {
-        'title': 'Change Language',
-        'subtitle': 'Change to Arabic',
-        'onTap': () {},
-      },
-      {},
-    ];
-    if (!authInfo.emailVerified) {
-      listOfSetting.add({
-        'title': 'Verify your email',
-        'subtitle': 'Your email is not verified',
-        'textColor': Colors.red,
-        'onTap': () {},
-      });
-      listOfSetting.add(
-        {},
-      );
-    }
-    if (authInfo.phoneNumber == '') {
-      listOfSetting.add(
-        {
-          'title': 'Add a phone number',
-          'subtitle': 'For easier logging in and restoration of your account',
-          'onTap': () {},
-        },
-      );
-    }
+    final listOfSetting =
+        ref.read(authenticationProvider.notifier).addToListTiles();
     return Scaffold(
       backgroundColor: theme.colorScheme.background,
       appBar: AppBar(
@@ -179,22 +155,16 @@ class ProfileScreen extends HookConsumerWidget {
             Column(
               children: listOfSetting.asMap().entries.map(
                 (e) {
-                  if ((e.key == 1 || e.key == 3) && e.value['title'] == null) {
-                    return const SizedBox(
-                      height: 8,
-                    );
-                  } else {
-                    return MyListTile(
-                      tilePlace: e.key == listOfSetting.length - 1 ||
-                              listOfSetting.length == 2
-                          ? ListTilePlace.last
-                          : ListTilePlace.middle,
-                      title: e.value['title'] as String,
-                      subtitle: e.value['subtitle'] as String,
-                      tileColor: theme.colorScheme.primaryContainer,
-                      textColor: e.value['textColor'],
-                    );
-                  }
+                  return MyListTile(
+                    tilePlace: e.key == listOfSetting.length - 1 ||
+                            listOfSetting.length == 2
+                        ? ListTilePlace.last
+                        : ListTilePlace.middle,
+                    title: e.value['title'] as String,
+                    subtitle: e.value['subtitle'] as String,
+                    tileColor: theme.colorScheme.primaryContainer,
+                    textColor: e.value['textColor'] as Color?,
+                  );
                 },
               ).toList(),
             ),

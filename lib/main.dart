@@ -3,19 +3,19 @@ import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:lottie/lottie.dart';
 
 import 'core/providers/router_provider.dart';
-import 'data/data source/remote_date_source.dart';
+import 'data/data source/patient_remote_date_source.dart';
 import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   final container = ProviderContainer(observers: [
-    WatchingProviders(),
+    const WatchingProviders(),
   ]);
   final remoteDataSource = container.read(remoteDataSourceProvider);
-
   runApp(
     UncontrolledProviderScope(
       container: container,

@@ -22,6 +22,7 @@ Doctor _$DoctorFromJson(Map<String, dynamic> json) {
 mixin _$Doctor {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String get imageUrl => throw _privateConstructorUsedError;
   String get speciality => throw _privateConstructorUsedError;
   String get aboutDoctor => throw _privateConstructorUsedError;
   DateTime get joinedOn => throw _privateConstructorUsedError;
@@ -43,6 +44,7 @@ abstract class $DoctorCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
+      String imageUrl,
       String speciality,
       String aboutDoctor,
       DateTime joinedOn,
@@ -50,6 +52,8 @@ abstract class $DoctorCopyWith<$Res> {
       double rating,
       DoctorAvailability availableOn,
       DoctorState doctorState});
+
+  $DoctorAvailabilityCopyWith<$Res> get availableOn;
 }
 
 /// @nodoc
@@ -67,6 +71,7 @@ class _$DoctorCopyWithImpl<$Res, $Val extends Doctor>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? imageUrl = null,
     Object? speciality = null,
     Object? aboutDoctor = null,
     Object? joinedOn = null,
@@ -83,6 +88,10 @@ class _$DoctorCopyWithImpl<$Res, $Val extends Doctor>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      imageUrl: null == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
               as String,
       speciality: null == speciality
           ? _value.speciality
@@ -114,6 +123,14 @@ class _$DoctorCopyWithImpl<$Res, $Val extends Doctor>
               as DoctorState,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DoctorAvailabilityCopyWith<$Res> get availableOn {
+    return $DoctorAvailabilityCopyWith<$Res>(_value.availableOn, (value) {
+      return _then(_value.copyWith(availableOn: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -125,6 +142,7 @@ abstract class _$$_DoctorCopyWith<$Res> implements $DoctorCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
+      String imageUrl,
       String speciality,
       String aboutDoctor,
       DateTime joinedOn,
@@ -132,6 +150,9 @@ abstract class _$$_DoctorCopyWith<$Res> implements $DoctorCopyWith<$Res> {
       double rating,
       DoctorAvailability availableOn,
       DoctorState doctorState});
+
+  @override
+  $DoctorAvailabilityCopyWith<$Res> get availableOn;
 }
 
 /// @nodoc
@@ -146,6 +167,7 @@ class __$$_DoctorCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? imageUrl = null,
     Object? speciality = null,
     Object? aboutDoctor = null,
     Object? joinedOn = null,
@@ -162,6 +184,10 @@ class __$$_DoctorCopyWithImpl<$Res>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      imageUrl: null == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
               as String,
       speciality: null == speciality
           ? _value.speciality
@@ -196,11 +222,13 @@ class __$$_DoctorCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$_Doctor implements _Doctor {
   const _$_Doctor(
       {required this.id,
       required this.name,
+      required this.imageUrl,
       required this.speciality,
       required this.aboutDoctor,
       required this.joinedOn,
@@ -217,6 +245,8 @@ class _$_Doctor implements _Doctor {
   final String id;
   @override
   final String name;
+  @override
+  final String imageUrl;
   @override
   final String speciality;
   @override
@@ -240,7 +270,7 @@ class _$_Doctor implements _Doctor {
 
   @override
   String toString() {
-    return 'Doctor(id: $id, name: $name, speciality: $speciality, aboutDoctor: $aboutDoctor, joinedOn: $joinedOn, reviews: $reviews, rating: $rating, availableOn: $availableOn, doctorState: $doctorState)';
+    return 'Doctor(id: $id, name: $name, imageUrl: $imageUrl, speciality: $speciality, aboutDoctor: $aboutDoctor, joinedOn: $joinedOn, reviews: $reviews, rating: $rating, availableOn: $availableOn, doctorState: $doctorState)';
   }
 
   @override
@@ -250,6 +280,8 @@ class _$_Doctor implements _Doctor {
             other is _$_Doctor &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl) &&
             (identical(other.speciality, speciality) ||
                 other.speciality == speciality) &&
             (identical(other.aboutDoctor, aboutDoctor) ||
@@ -270,6 +302,7 @@ class _$_Doctor implements _Doctor {
       runtimeType,
       id,
       name,
+      imageUrl,
       speciality,
       aboutDoctor,
       joinedOn,
@@ -296,6 +329,7 @@ abstract class _Doctor implements Doctor {
   const factory _Doctor(
       {required final String id,
       required final String name,
+      required final String imageUrl,
       required final String speciality,
       required final String aboutDoctor,
       required final DateTime joinedOn,
@@ -310,6 +344,8 @@ abstract class _Doctor implements Doctor {
   String get id;
   @override
   String get name;
+  @override
+  String get imageUrl;
   @override
   String get speciality;
   @override
@@ -327,5 +363,880 @@ abstract class _Doctor implements Doctor {
   @override
   @JsonKey(ignore: true)
   _$$_DoctorCopyWith<_$_Doctor> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Review _$ReviewFromJson(Map<String, dynamic> json) {
+  return _Review.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Review {
+  double get rating => throw _privateConstructorUsedError;
+  String get review => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ReviewCopyWith<Review> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ReviewCopyWith<$Res> {
+  factory $ReviewCopyWith(Review value, $Res Function(Review) then) =
+      _$ReviewCopyWithImpl<$Res, Review>;
+  @useResult
+  $Res call({double rating, String review});
+}
+
+/// @nodoc
+class _$ReviewCopyWithImpl<$Res, $Val extends Review>
+    implements $ReviewCopyWith<$Res> {
+  _$ReviewCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? rating = null,
+    Object? review = null,
+  }) {
+    return _then(_value.copyWith(
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double,
+      review: null == review
+          ? _value.review
+          : review // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ReviewCopyWith<$Res> implements $ReviewCopyWith<$Res> {
+  factory _$$_ReviewCopyWith(_$_Review value, $Res Function(_$_Review) then) =
+      __$$_ReviewCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({double rating, String review});
+}
+
+/// @nodoc
+class __$$_ReviewCopyWithImpl<$Res>
+    extends _$ReviewCopyWithImpl<$Res, _$_Review>
+    implements _$$_ReviewCopyWith<$Res> {
+  __$$_ReviewCopyWithImpl(_$_Review _value, $Res Function(_$_Review) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? rating = null,
+    Object? review = null,
+  }) {
+    return _then(_$_Review(
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double,
+      review: null == review
+          ? _value.review
+          : review // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Review implements _Review {
+  const _$_Review({required this.rating, required this.review});
+
+  factory _$_Review.fromJson(Map<String, dynamic> json) =>
+      _$$_ReviewFromJson(json);
+
+  @override
+  final double rating;
+  @override
+  final String review;
+
+  @override
+  String toString() {
+    return 'Review(rating: $rating, review: $review)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Review &&
+            (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.review, review) || other.review == review));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, rating, review);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ReviewCopyWith<_$_Review> get copyWith =>
+      __$$_ReviewCopyWithImpl<_$_Review>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ReviewToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Review implements Review {
+  const factory _Review(
+      {required final double rating, required final String review}) = _$_Review;
+
+  factory _Review.fromJson(Map<String, dynamic> json) = _$_Review.fromJson;
+
+  @override
+  double get rating;
+  @override
+  String get review;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ReviewCopyWith<_$_Review> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+DoctorAvailability _$DoctorAvailabilityFromJson(Map<String, dynamic> json) {
+  return _DoctorAvailability.fromJson(json);
+}
+
+/// @nodoc
+mixin _$DoctorAvailability {
+  bool get online => throw _privateConstructorUsedError;
+  bool get offline => throw _privateConstructorUsedError;
+  List<OnlineAvailability>? get onlineAvailability =>
+      throw _privateConstructorUsedError;
+  List<OfflineAvailability>? get offlineAvailability =>
+      throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $DoctorAvailabilityCopyWith<DoctorAvailability> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DoctorAvailabilityCopyWith<$Res> {
+  factory $DoctorAvailabilityCopyWith(
+          DoctorAvailability value, $Res Function(DoctorAvailability) then) =
+      _$DoctorAvailabilityCopyWithImpl<$Res, DoctorAvailability>;
+  @useResult
+  $Res call(
+      {bool online,
+      bool offline,
+      List<OnlineAvailability>? onlineAvailability,
+      List<OfflineAvailability>? offlineAvailability});
+}
+
+/// @nodoc
+class _$DoctorAvailabilityCopyWithImpl<$Res, $Val extends DoctorAvailability>
+    implements $DoctorAvailabilityCopyWith<$Res> {
+  _$DoctorAvailabilityCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? online = null,
+    Object? offline = null,
+    Object? onlineAvailability = freezed,
+    Object? offlineAvailability = freezed,
+  }) {
+    return _then(_value.copyWith(
+      online: null == online
+          ? _value.online
+          : online // ignore: cast_nullable_to_non_nullable
+              as bool,
+      offline: null == offline
+          ? _value.offline
+          : offline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      onlineAvailability: freezed == onlineAvailability
+          ? _value.onlineAvailability
+          : onlineAvailability // ignore: cast_nullable_to_non_nullable
+              as List<OnlineAvailability>?,
+      offlineAvailability: freezed == offlineAvailability
+          ? _value.offlineAvailability
+          : offlineAvailability // ignore: cast_nullable_to_non_nullable
+              as List<OfflineAvailability>?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_DoctorAvailabilityCopyWith<$Res>
+    implements $DoctorAvailabilityCopyWith<$Res> {
+  factory _$$_DoctorAvailabilityCopyWith(_$_DoctorAvailability value,
+          $Res Function(_$_DoctorAvailability) then) =
+      __$$_DoctorAvailabilityCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {bool online,
+      bool offline,
+      List<OnlineAvailability>? onlineAvailability,
+      List<OfflineAvailability>? offlineAvailability});
+}
+
+/// @nodoc
+class __$$_DoctorAvailabilityCopyWithImpl<$Res>
+    extends _$DoctorAvailabilityCopyWithImpl<$Res, _$_DoctorAvailability>
+    implements _$$_DoctorAvailabilityCopyWith<$Res> {
+  __$$_DoctorAvailabilityCopyWithImpl(
+      _$_DoctorAvailability _value, $Res Function(_$_DoctorAvailability) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? online = null,
+    Object? offline = null,
+    Object? onlineAvailability = freezed,
+    Object? offlineAvailability = freezed,
+  }) {
+    return _then(_$_DoctorAvailability(
+      online: null == online
+          ? _value.online
+          : online // ignore: cast_nullable_to_non_nullable
+              as bool,
+      offline: null == offline
+          ? _value.offline
+          : offline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      onlineAvailability: freezed == onlineAvailability
+          ? _value._onlineAvailability
+          : onlineAvailability // ignore: cast_nullable_to_non_nullable
+              as List<OnlineAvailability>?,
+      offlineAvailability: freezed == offlineAvailability
+          ? _value._offlineAvailability
+          : offlineAvailability // ignore: cast_nullable_to_non_nullable
+              as List<OfflineAvailability>?,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(explicitToJson: true)
+class _$_DoctorAvailability implements _DoctorAvailability {
+  const _$_DoctorAvailability(
+      {required this.online,
+      required this.offline,
+      final List<OnlineAvailability>? onlineAvailability,
+      final List<OfflineAvailability>? offlineAvailability})
+      : _onlineAvailability = onlineAvailability,
+        _offlineAvailability = offlineAvailability;
+
+  factory _$_DoctorAvailability.fromJson(Map<String, dynamic> json) =>
+      _$$_DoctorAvailabilityFromJson(json);
+
+  @override
+  final bool online;
+  @override
+  final bool offline;
+  final List<OnlineAvailability>? _onlineAvailability;
+  @override
+  List<OnlineAvailability>? get onlineAvailability {
+    final value = _onlineAvailability;
+    if (value == null) return null;
+    if (_onlineAvailability is EqualUnmodifiableListView)
+      return _onlineAvailability;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<OfflineAvailability>? _offlineAvailability;
+  @override
+  List<OfflineAvailability>? get offlineAvailability {
+    final value = _offlineAvailability;
+    if (value == null) return null;
+    if (_offlineAvailability is EqualUnmodifiableListView)
+      return _offlineAvailability;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'DoctorAvailability(online: $online, offline: $offline, onlineAvailability: $onlineAvailability, offlineAvailability: $offlineAvailability)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DoctorAvailability &&
+            (identical(other.online, online) || other.online == online) &&
+            (identical(other.offline, offline) || other.offline == offline) &&
+            const DeepCollectionEquality()
+                .equals(other._onlineAvailability, _onlineAvailability) &&
+            const DeepCollectionEquality()
+                .equals(other._offlineAvailability, _offlineAvailability));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      online,
+      offline,
+      const DeepCollectionEquality().hash(_onlineAvailability),
+      const DeepCollectionEquality().hash(_offlineAvailability));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DoctorAvailabilityCopyWith<_$_DoctorAvailability> get copyWith =>
+      __$$_DoctorAvailabilityCopyWithImpl<_$_DoctorAvailability>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_DoctorAvailabilityToJson(
+      this,
+    );
+  }
+}
+
+abstract class _DoctorAvailability implements DoctorAvailability {
+  const factory _DoctorAvailability(
+          {required final bool online,
+          required final bool offline,
+          final List<OnlineAvailability>? onlineAvailability,
+          final List<OfflineAvailability>? offlineAvailability}) =
+      _$_DoctorAvailability;
+
+  factory _DoctorAvailability.fromJson(Map<String, dynamic> json) =
+      _$_DoctorAvailability.fromJson;
+
+  @override
+  bool get online;
+  @override
+  bool get offline;
+  @override
+  List<OnlineAvailability>? get onlineAvailability;
+  @override
+  List<OfflineAvailability>? get offlineAvailability;
+  @override
+  @JsonKey(ignore: true)
+  _$$_DoctorAvailabilityCopyWith<_$_DoctorAvailability> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+OnlineAvailability _$OnlineAvailabilityFromJson(Map<String, dynamic> json) {
+  return _OnlineAvailability.fromJson(json);
+}
+
+/// @nodoc
+mixin _$OnlineAvailability {
+  DateTime get day => throw _privateConstructorUsedError;
+  List<TimeInDayOnline> get timesAvailable =>
+      throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $OnlineAvailabilityCopyWith<OnlineAvailability> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $OnlineAvailabilityCopyWith<$Res> {
+  factory $OnlineAvailabilityCopyWith(
+          OnlineAvailability value, $Res Function(OnlineAvailability) then) =
+      _$OnlineAvailabilityCopyWithImpl<$Res, OnlineAvailability>;
+  @useResult
+  $Res call({DateTime day, List<TimeInDayOnline> timesAvailable});
+}
+
+/// @nodoc
+class _$OnlineAvailabilityCopyWithImpl<$Res, $Val extends OnlineAvailability>
+    implements $OnlineAvailabilityCopyWith<$Res> {
+  _$OnlineAvailabilityCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? day = null,
+    Object? timesAvailable = null,
+  }) {
+    return _then(_value.copyWith(
+      day: null == day
+          ? _value.day
+          : day // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      timesAvailable: null == timesAvailable
+          ? _value.timesAvailable
+          : timesAvailable // ignore: cast_nullable_to_non_nullable
+              as List<TimeInDayOnline>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_OnlineAvailabilityCopyWith<$Res>
+    implements $OnlineAvailabilityCopyWith<$Res> {
+  factory _$$_OnlineAvailabilityCopyWith(_$_OnlineAvailability value,
+          $Res Function(_$_OnlineAvailability) then) =
+      __$$_OnlineAvailabilityCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({DateTime day, List<TimeInDayOnline> timesAvailable});
+}
+
+/// @nodoc
+class __$$_OnlineAvailabilityCopyWithImpl<$Res>
+    extends _$OnlineAvailabilityCopyWithImpl<$Res, _$_OnlineAvailability>
+    implements _$$_OnlineAvailabilityCopyWith<$Res> {
+  __$$_OnlineAvailabilityCopyWithImpl(
+      _$_OnlineAvailability _value, $Res Function(_$_OnlineAvailability) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? day = null,
+    Object? timesAvailable = null,
+  }) {
+    return _then(_$_OnlineAvailability(
+      day: null == day
+          ? _value.day
+          : day // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      timesAvailable: null == timesAvailable
+          ? _value._timesAvailable
+          : timesAvailable // ignore: cast_nullable_to_non_nullable
+              as List<TimeInDayOnline>,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(explicitToJson: true)
+class _$_OnlineAvailability implements _OnlineAvailability {
+  const _$_OnlineAvailability(
+      {required this.day, required final List<TimeInDayOnline> timesAvailable})
+      : _timesAvailable = timesAvailable;
+
+  factory _$_OnlineAvailability.fromJson(Map<String, dynamic> json) =>
+      _$$_OnlineAvailabilityFromJson(json);
+
+  @override
+  final DateTime day;
+  final List<TimeInDayOnline> _timesAvailable;
+  @override
+  List<TimeInDayOnline> get timesAvailable {
+    if (_timesAvailable is EqualUnmodifiableListView) return _timesAvailable;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_timesAvailable);
+  }
+
+  @override
+  String toString() {
+    return 'OnlineAvailability(day: $day, timesAvailable: $timesAvailable)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_OnlineAvailability &&
+            (identical(other.day, day) || other.day == day) &&
+            const DeepCollectionEquality()
+                .equals(other._timesAvailable, _timesAvailable));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, day, const DeepCollectionEquality().hash(_timesAvailable));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_OnlineAvailabilityCopyWith<_$_OnlineAvailability> get copyWith =>
+      __$$_OnlineAvailabilityCopyWithImpl<_$_OnlineAvailability>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_OnlineAvailabilityToJson(
+      this,
+    );
+  }
+}
+
+abstract class _OnlineAvailability implements OnlineAvailability {
+  const factory _OnlineAvailability(
+          {required final DateTime day,
+          required final List<TimeInDayOnline> timesAvailable}) =
+      _$_OnlineAvailability;
+
+  factory _OnlineAvailability.fromJson(Map<String, dynamic> json) =
+      _$_OnlineAvailability.fromJson;
+
+  @override
+  DateTime get day;
+  @override
+  List<TimeInDayOnline> get timesAvailable;
+  @override
+  @JsonKey(ignore: true)
+  _$$_OnlineAvailabilityCopyWith<_$_OnlineAvailability> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+TimeInDayOnline _$TimeInDayOnlineFromJson(Map<String, dynamic> json) {
+  return _TimeInDayOnline.fromJson(json);
+}
+
+/// @nodoc
+mixin _$TimeInDayOnline {
+  String get timeOfDay => throw _privateConstructorUsedError;
+  bool get available => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TimeInDayOnlineCopyWith<TimeInDayOnline> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TimeInDayOnlineCopyWith<$Res> {
+  factory $TimeInDayOnlineCopyWith(
+          TimeInDayOnline value, $Res Function(TimeInDayOnline) then) =
+      _$TimeInDayOnlineCopyWithImpl<$Res, TimeInDayOnline>;
+  @useResult
+  $Res call({String timeOfDay, bool available});
+}
+
+/// @nodoc
+class _$TimeInDayOnlineCopyWithImpl<$Res, $Val extends TimeInDayOnline>
+    implements $TimeInDayOnlineCopyWith<$Res> {
+  _$TimeInDayOnlineCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? timeOfDay = null,
+    Object? available = null,
+  }) {
+    return _then(_value.copyWith(
+      timeOfDay: null == timeOfDay
+          ? _value.timeOfDay
+          : timeOfDay // ignore: cast_nullable_to_non_nullable
+              as String,
+      available: null == available
+          ? _value.available
+          : available // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_TimeInDayOnlineCopyWith<$Res>
+    implements $TimeInDayOnlineCopyWith<$Res> {
+  factory _$$_TimeInDayOnlineCopyWith(
+          _$_TimeInDayOnline value, $Res Function(_$_TimeInDayOnline) then) =
+      __$$_TimeInDayOnlineCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String timeOfDay, bool available});
+}
+
+/// @nodoc
+class __$$_TimeInDayOnlineCopyWithImpl<$Res>
+    extends _$TimeInDayOnlineCopyWithImpl<$Res, _$_TimeInDayOnline>
+    implements _$$_TimeInDayOnlineCopyWith<$Res> {
+  __$$_TimeInDayOnlineCopyWithImpl(
+      _$_TimeInDayOnline _value, $Res Function(_$_TimeInDayOnline) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? timeOfDay = null,
+    Object? available = null,
+  }) {
+    return _then(_$_TimeInDayOnline(
+      timeOfDay: null == timeOfDay
+          ? _value.timeOfDay
+          : timeOfDay // ignore: cast_nullable_to_non_nullable
+              as String,
+      available: null == available
+          ? _value.available
+          : available // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_TimeInDayOnline implements _TimeInDayOnline {
+  const _$_TimeInDayOnline({required this.timeOfDay, required this.available});
+
+  factory _$_TimeInDayOnline.fromJson(Map<String, dynamic> json) =>
+      _$$_TimeInDayOnlineFromJson(json);
+
+  @override
+  final String timeOfDay;
+  @override
+  final bool available;
+
+  @override
+  String toString() {
+    return 'TimeInDayOnline(timeOfDay: $timeOfDay, available: $available)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_TimeInDayOnline &&
+            (identical(other.timeOfDay, timeOfDay) ||
+                other.timeOfDay == timeOfDay) &&
+            (identical(other.available, available) ||
+                other.available == available));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, timeOfDay, available);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_TimeInDayOnlineCopyWith<_$_TimeInDayOnline> get copyWith =>
+      __$$_TimeInDayOnlineCopyWithImpl<_$_TimeInDayOnline>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_TimeInDayOnlineToJson(
+      this,
+    );
+  }
+}
+
+abstract class _TimeInDayOnline implements TimeInDayOnline {
+  const factory _TimeInDayOnline(
+      {required final String timeOfDay,
+      required final bool available}) = _$_TimeInDayOnline;
+
+  factory _TimeInDayOnline.fromJson(Map<String, dynamic> json) =
+      _$_TimeInDayOnline.fromJson;
+
+  @override
+  String get timeOfDay;
+  @override
+  bool get available;
+  @override
+  @JsonKey(ignore: true)
+  _$$_TimeInDayOnlineCopyWith<_$_TimeInDayOnline> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+OfflineAvailability _$OfflineAvailabilityFromJson(Map<String, dynamic> json) {
+  return _OfflineAvailability.fromJson(json);
+}
+
+/// @nodoc
+mixin _$OfflineAvailability {
+  DateTime get day => throw _privateConstructorUsedError;
+  String get timeFrom => throw _privateConstructorUsedError;
+  String get timeTo => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $OfflineAvailabilityCopyWith<OfflineAvailability> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $OfflineAvailabilityCopyWith<$Res> {
+  factory $OfflineAvailabilityCopyWith(
+          OfflineAvailability value, $Res Function(OfflineAvailability) then) =
+      _$OfflineAvailabilityCopyWithImpl<$Res, OfflineAvailability>;
+  @useResult
+  $Res call({DateTime day, String timeFrom, String timeTo});
+}
+
+/// @nodoc
+class _$OfflineAvailabilityCopyWithImpl<$Res, $Val extends OfflineAvailability>
+    implements $OfflineAvailabilityCopyWith<$Res> {
+  _$OfflineAvailabilityCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? day = null,
+    Object? timeFrom = null,
+    Object? timeTo = null,
+  }) {
+    return _then(_value.copyWith(
+      day: null == day
+          ? _value.day
+          : day // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      timeFrom: null == timeFrom
+          ? _value.timeFrom
+          : timeFrom // ignore: cast_nullable_to_non_nullable
+              as String,
+      timeTo: null == timeTo
+          ? _value.timeTo
+          : timeTo // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_OfflineAvailabilityCopyWith<$Res>
+    implements $OfflineAvailabilityCopyWith<$Res> {
+  factory _$$_OfflineAvailabilityCopyWith(_$_OfflineAvailability value,
+          $Res Function(_$_OfflineAvailability) then) =
+      __$$_OfflineAvailabilityCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({DateTime day, String timeFrom, String timeTo});
+}
+
+/// @nodoc
+class __$$_OfflineAvailabilityCopyWithImpl<$Res>
+    extends _$OfflineAvailabilityCopyWithImpl<$Res, _$_OfflineAvailability>
+    implements _$$_OfflineAvailabilityCopyWith<$Res> {
+  __$$_OfflineAvailabilityCopyWithImpl(_$_OfflineAvailability _value,
+      $Res Function(_$_OfflineAvailability) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? day = null,
+    Object? timeFrom = null,
+    Object? timeTo = null,
+  }) {
+    return _then(_$_OfflineAvailability(
+      day: null == day
+          ? _value.day
+          : day // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      timeFrom: null == timeFrom
+          ? _value.timeFrom
+          : timeFrom // ignore: cast_nullable_to_non_nullable
+              as String,
+      timeTo: null == timeTo
+          ? _value.timeTo
+          : timeTo // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_OfflineAvailability implements _OfflineAvailability {
+  const _$_OfflineAvailability(
+      {required this.day, required this.timeFrom, required this.timeTo});
+
+  factory _$_OfflineAvailability.fromJson(Map<String, dynamic> json) =>
+      _$$_OfflineAvailabilityFromJson(json);
+
+  @override
+  final DateTime day;
+  @override
+  final String timeFrom;
+  @override
+  final String timeTo;
+
+  @override
+  String toString() {
+    return 'OfflineAvailability(day: $day, timeFrom: $timeFrom, timeTo: $timeTo)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_OfflineAvailability &&
+            (identical(other.day, day) || other.day == day) &&
+            (identical(other.timeFrom, timeFrom) ||
+                other.timeFrom == timeFrom) &&
+            (identical(other.timeTo, timeTo) || other.timeTo == timeTo));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, day, timeFrom, timeTo);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_OfflineAvailabilityCopyWith<_$_OfflineAvailability> get copyWith =>
+      __$$_OfflineAvailabilityCopyWithImpl<_$_OfflineAvailability>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_OfflineAvailabilityToJson(
+      this,
+    );
+  }
+}
+
+abstract class _OfflineAvailability implements OfflineAvailability {
+  const factory _OfflineAvailability(
+      {required final DateTime day,
+      required final String timeFrom,
+      required final String timeTo}) = _$_OfflineAvailability;
+
+  factory _OfflineAvailability.fromJson(Map<String, dynamic> json) =
+      _$_OfflineAvailability.fromJson;
+
+  @override
+  DateTime get day;
+  @override
+  String get timeFrom;
+  @override
+  String get timeTo;
+  @override
+  @JsonKey(ignore: true)
+  _$$_OfflineAvailabilityCopyWith<_$_OfflineAvailability> get copyWith =>
       throw _privateConstructorUsedError;
 }

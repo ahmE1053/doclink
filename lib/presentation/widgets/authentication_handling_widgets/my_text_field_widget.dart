@@ -7,18 +7,22 @@ class MyTextField extends StatelessWidget {
     required this.colorScheme,
     this.prefixIcon,
     this.suffix,
-    required this.validator,
+    this.validator,
     this.obscure = false,
     required this.label,
     this.inputType = TextInputType.text,
     this.inputAction = TextInputAction.done,
+    this.onChanged,
+    this.onSubmitted,
   });
 
   final TextEditingController controller;
   final ColorScheme colorScheme;
   final Widget? prefixIcon;
   final Widget? suffix;
-  final String? Function(String? value) validator;
+  final String? Function(String? value)? validator;
+  final void Function(String value)? onChanged;
+  final void Function(String value)? onSubmitted;
   final bool obscure;
   final String label;
   final TextInputType inputType;
@@ -28,6 +32,8 @@ class MyTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onFieldSubmitted: onSubmitted,
+      onChanged: onChanged,
       controller: controller,
       validator: validator,
       textInputAction: inputAction,

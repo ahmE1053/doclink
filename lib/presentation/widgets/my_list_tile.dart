@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../core/consts/apptypography.dart';
+import '../../core/consts/app_typography.dart';
 
 enum ListTilePlace {
   middle,
@@ -30,30 +30,33 @@ class MyListTile extends StatelessWidget {
   final Color tileColor;
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      textColor: textColor,
-      tileColor: tileColor,
-      onTap: onTap,
-      title: FittedBox(
-        alignment: AlignmentDirectional.centerStart,
-        fit: BoxFit.scaleDown,
-        child: Text(
-          title,
-          style: AppTypography.semiHeadlineSize(context),
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 4),
+      child: ListTile(
+        textColor: textColor,
+        tileColor: tileColor,
+        onTap: onTap,
+        title: FittedBox(
+          alignment: AlignmentDirectional.centerStart,
+          fit: BoxFit.scaleDown,
+          child: Text(
+            title,
+            style: AppTypography.semiHeadlineSize(context),
+          ),
         ),
-      ),
-      subtitle: FittedBox(
-        alignment: AlignmentDirectional.centerStart,
-        fit: BoxFit.scaleDown,
-        child: Text(
-          subtitle,
-          style: AppTypography.bodySize(context),
+        subtitle: FittedBox(
+          alignment: AlignmentDirectional.centerStart,
+          fit: BoxFit.scaleDown,
+          child: Text(
+            subtitle,
+            style: AppTypography.bodySize(context),
+          ),
         ),
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: tilePlace == ListTilePlace.middle
-            ? middleBorderRadius
-            : lastBorderRadius,
+        shape: RoundedRectangleBorder(
+          borderRadius: tilePlace == ListTilePlace.middle
+              ? middleBorderRadius
+              : lastBorderRadius,
+        ),
       ),
     );
   }

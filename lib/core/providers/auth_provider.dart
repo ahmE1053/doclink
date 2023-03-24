@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'create_account_provider.dart';
@@ -86,6 +87,36 @@ class AuthenticationNotifier extends Notifier<User?> {
       },
     );
     ref.invalidateSelf();
+  }
+
+  List<Map<String, dynamic>> addToListTiles() {
+    final listOfSetting = [
+      {
+        'title': 'Change Language',
+        'subtitle': 'Change to Arabic',
+        'onTap': () {},
+      },
+    ];
+    if (!state!.emailVerified) {
+      listOfSetting.add(
+        {
+          'title': 'Verify your email',
+          'subtitle': 'Your email is not verified',
+          'textColor': Colors.red,
+          'onTap': () {},
+        },
+      );
+    }
+    if (state!.phoneNumber == '' || state!.phoneNumber == null) {
+      listOfSetting.add(
+        {
+          'title': 'Add a phone number',
+          'subtitle': 'For easier logging in and restoration of your account',
+          'onTap': () {},
+        },
+      );
+    }
+    return listOfSetting;
   }
 }
 

@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../core/providers/auth_provider.dart';
 import '../../domain/entities/patient.dart';
 
-class RemoteDataSource extends AsyncNotifier<Patient?> {
+class PatientRemoteDataSource extends AsyncNotifier<Patient?> {
   @override
   Future<Patient?> build() async {
     final user = ref.watch(authenticationProvider);
@@ -29,4 +29,5 @@ class RemoteDataSource extends AsyncNotifier<Patient?> {
 }
 
 final remoteDataSourceProvider =
-    AsyncNotifierProvider<RemoteDataSource, Patient?>(() => RemoteDataSource());
+    AsyncNotifierProvider<PatientRemoteDataSource, Patient?>(
+        () => PatientRemoteDataSource());

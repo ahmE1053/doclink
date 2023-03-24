@@ -11,7 +11,11 @@ class MainScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: child(),
+      body: Padding(
+          padding: const EdgeInsets.only(
+            bottom: 35,
+          ),
+          child: child()),
       bottomNavigationBar: ConvexAppBar(
         key: ref.watch(routerHandlerProvider.notifier).convexBottomBarKey,
         disableDefaultTabController: true,
