@@ -16,9 +16,8 @@ class ProfileScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userInfo = ref.watch(remoteDataSourceProvider).value!;
+    final userInfo = ref.watch(patientRemoteDataSourceProvider).value!;
     final authInfo = ref.watch(authenticationProvider)!;
-    print(authInfo);
     final mq = MediaQuery.of(context).size;
     final theme = Theme.of(context);
     final listOfSetting =

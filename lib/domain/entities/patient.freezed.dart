@@ -25,6 +25,7 @@ mixin _$Patient {
   DateTime get joinedOn => throw _privateConstructorUsedError;
   List<String> get chatList => throw _privateConstructorUsedError;
   List<String> get appointments => throw _privateConstructorUsedError;
+  List<int> get favoriteDoctors => throw _privateConstructorUsedError;
   DateTime get dateOfBirth => throw _privateConstructorUsedError;
   String get imageUrl => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $PatientCopyWith<$Res> {
       DateTime joinedOn,
       List<String> chatList,
       List<String> appointments,
+      List<int> favoriteDoctors,
       DateTime dateOfBirth,
       String imageUrl,
       String email});
@@ -68,6 +70,7 @@ class _$PatientCopyWithImpl<$Res, $Val extends Patient>
     Object? joinedOn = null,
     Object? chatList = null,
     Object? appointments = null,
+    Object? favoriteDoctors = null,
     Object? dateOfBirth = null,
     Object? imageUrl = null,
     Object? email = null,
@@ -93,6 +96,10 @@ class _$PatientCopyWithImpl<$Res, $Val extends Patient>
           ? _value.appointments
           : appointments // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      favoriteDoctors: null == favoriteDoctors
+          ? _value.favoriteDoctors
+          : favoriteDoctors // ignore: cast_nullable_to_non_nullable
+              as List<int>,
       dateOfBirth: null == dateOfBirth
           ? _value.dateOfBirth
           : dateOfBirth // ignore: cast_nullable_to_non_nullable
@@ -122,6 +129,7 @@ abstract class _$$_PatientCopyWith<$Res> implements $PatientCopyWith<$Res> {
       DateTime joinedOn,
       List<String> chatList,
       List<String> appointments,
+      List<int> favoriteDoctors,
       DateTime dateOfBirth,
       String imageUrl,
       String email});
@@ -142,6 +150,7 @@ class __$$_PatientCopyWithImpl<$Res>
     Object? joinedOn = null,
     Object? chatList = null,
     Object? appointments = null,
+    Object? favoriteDoctors = null,
     Object? dateOfBirth = null,
     Object? imageUrl = null,
     Object? email = null,
@@ -167,6 +176,10 @@ class __$$_PatientCopyWithImpl<$Res>
           ? _value._appointments
           : appointments // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      favoriteDoctors: null == favoriteDoctors
+          ? _value._favoriteDoctors
+          : favoriteDoctors // ignore: cast_nullable_to_non_nullable
+              as List<int>,
       dateOfBirth: null == dateOfBirth
           ? _value.dateOfBirth
           : dateOfBirth // ignore: cast_nullable_to_non_nullable
@@ -192,11 +205,13 @@ class _$_Patient implements _Patient {
       required this.joinedOn,
       required final List<String> chatList,
       required final List<String> appointments,
+      required final List<int> favoriteDoctors,
       required this.dateOfBirth,
       required this.imageUrl,
       required this.email})
       : _chatList = chatList,
-        _appointments = appointments;
+        _appointments = appointments,
+        _favoriteDoctors = favoriteDoctors;
 
   factory _$_Patient.fromJson(Map<String, dynamic> json) =>
       _$$_PatientFromJson(json);
@@ -223,6 +238,14 @@ class _$_Patient implements _Patient {
     return EqualUnmodifiableListView(_appointments);
   }
 
+  final List<int> _favoriteDoctors;
+  @override
+  List<int> get favoriteDoctors {
+    if (_favoriteDoctors is EqualUnmodifiableListView) return _favoriteDoctors;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_favoriteDoctors);
+  }
+
   @override
   final DateTime dateOfBirth;
   @override
@@ -232,7 +255,7 @@ class _$_Patient implements _Patient {
 
   @override
   String toString() {
-    return 'Patient(id: $id, name: $name, joinedOn: $joinedOn, chatList: $chatList, appointments: $appointments, dateOfBirth: $dateOfBirth, imageUrl: $imageUrl, email: $email)';
+    return 'Patient(id: $id, name: $name, joinedOn: $joinedOn, chatList: $chatList, appointments: $appointments, favoriteDoctors: $favoriteDoctors, dateOfBirth: $dateOfBirth, imageUrl: $imageUrl, email: $email)';
   }
 
   @override
@@ -247,6 +270,8 @@ class _$_Patient implements _Patient {
             const DeepCollectionEquality().equals(other._chatList, _chatList) &&
             const DeepCollectionEquality()
                 .equals(other._appointments, _appointments) &&
+            const DeepCollectionEquality()
+                .equals(other._favoriteDoctors, _favoriteDoctors) &&
             (identical(other.dateOfBirth, dateOfBirth) ||
                 other.dateOfBirth == dateOfBirth) &&
             (identical(other.imageUrl, imageUrl) ||
@@ -263,6 +288,7 @@ class _$_Patient implements _Patient {
       joinedOn,
       const DeepCollectionEquality().hash(_chatList),
       const DeepCollectionEquality().hash(_appointments),
+      const DeepCollectionEquality().hash(_favoriteDoctors),
       dateOfBirth,
       imageUrl,
       email);
@@ -288,6 +314,7 @@ abstract class _Patient implements Patient {
       required final DateTime joinedOn,
       required final List<String> chatList,
       required final List<String> appointments,
+      required final List<int> favoriteDoctors,
       required final DateTime dateOfBirth,
       required final String imageUrl,
       required final String email}) = _$_Patient;
@@ -304,6 +331,8 @@ abstract class _Patient implements Patient {
   List<String> get chatList;
   @override
   List<String> get appointments;
+  @override
+  List<int> get favoriteDoctors;
   @override
   DateTime get dateOfBirth;
   @override

@@ -12,6 +12,7 @@ class Patient with _$Patient {
     required DateTime joinedOn,
     required List<String> chatList,
     required List<String> appointments,
+    required List<int> favoriteDoctors,
     required DateTime dateOfBirth,
     required String imageUrl,
     required String email,

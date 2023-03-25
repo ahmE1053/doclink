@@ -198,7 +198,7 @@ class CreateAccountInfoNotifier extends AutoDisposeNotifier<CreateAccountInfo> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('No'),
+              child: const Text('No'),
             ),
           ],
         ),

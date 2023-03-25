@@ -54,22 +54,39 @@ class HomeDoctorCard extends ConsumerWidget {
                 ),
                 Expanded(
                   flex: 3,
-                  child: FittedBox(
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      textHeightBehavior: const TextHeightBehavior(
-                          applyHeightToFirstAscent: true,
-                          leadingDistribution: TextLeadingDistribution.even),
-                      text: TextSpan(
-                        text: doctor.name,
-                        style: AppTypography.bodySize(context),
-                        children: [
-                          TextSpan(
-                            text: '\n${doctor.speciality}',
-                            style: AppTypography.smallSize(context),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        FittedBox(
+                          alignment: AlignmentDirectional.centerStart,
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            doctor.name,
+                            style: AppTypography.bodySize(context),
                           ),
-                        ],
-                      ),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              doctor.speciality,
+                              style: AppTypography.smallSize(context),
+                            ),
+                            Expanded(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    '${doctor.rating} (${doctor.reviews.length})',
+                                    style: AppTypography.smallSize(context),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ),

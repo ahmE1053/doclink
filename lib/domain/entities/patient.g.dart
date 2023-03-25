@@ -15,6 +15,9 @@ _$_Patient _$$_PatientFromJson(Map<String, dynamic> json) => _$_Patient(
       appointments: (json['appointments'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
+      favoriteDoctors: (json['favoriteDoctors'] as List<dynamic>)
+          .map((e) => e as int)
+          .toList(),
       dateOfBirth: DateTime.parse(json['dateOfBirth'] as String),
       imageUrl: json['imageUrl'] as String,
       email: json['email'] as String,
@@ -27,6 +30,7 @@ Map<String, dynamic> _$$_PatientToJson(_$_Patient instance) =>
       'joinedOn': instance.joinedOn.toIso8601String(),
       'chatList': instance.chatList,
       'appointments': instance.appointments,
+      'favoriteDoctors': instance.favoriteDoctors,
       'dateOfBirth': instance.dateOfBirth.toIso8601String(),
       'imageUrl': instance.imageUrl,
       'email': instance.email,

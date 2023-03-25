@@ -68,8 +68,6 @@ class AuthenticationNotifier extends Notifier<User?> {
   }
 
   Future<void> configureAccount() async {
-    print('auth $state');
-
     final user = state!;
     final accountInfo = ref.read(createAccountInfoProvider);
     await user.updatePhotoURL(accountInfo.imageUrl ?? '');
@@ -84,6 +82,7 @@ class AuthenticationNotifier extends Notifier<User?> {
         'name': accountInfo.name!,
         'imageUrl': accountInfo.imageUrl ?? '',
         'dateOfBirth': accountInfo.dateOfBirth!.toIso8601String(),
+        'favoriteDoctors': [],
       },
     );
     ref.invalidateSelf();

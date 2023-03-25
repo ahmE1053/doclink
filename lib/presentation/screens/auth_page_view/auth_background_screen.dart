@@ -26,7 +26,6 @@ class AuthBackgroundScreen extends HookConsumerWidget {
     final bottomButtonText = useState(signinButtonText);
     final authState = useState(AuthState.signin);
     final otherBottomText = useState(otherSigninText);
-    print('hello');
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus!.unfocus();

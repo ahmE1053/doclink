@@ -15,7 +15,7 @@ class SplashScreen extends HookConsumerWidget {
       () => WidgetsBinding.instance.addPostFrameCallback(
         (timeStamp) {
           if (context.mounted) {
-            ref.watch(remoteDataSourceProvider).when(
+            ref.watch(patientRemoteDataSourceProvider).when(
                   data: (data) {
                     if (data == null) {
                       context.go('/auth');

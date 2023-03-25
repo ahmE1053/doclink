@@ -1,6 +1,7 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:doclink/core/providers/auth_provider.dart';
 import 'package:doclink/core/providers/state_providers.dart';
+import 'package:doclink/presentation/screens/home_screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
@@ -81,6 +82,11 @@ class RouterHandlerNotifier extends Notifier<RouterHandler> {
       case (0):
         if (state.oldIndex == index) {
           ref.invalidate(homeSearchTextField);
+          ref.invalidate(doctorSearchResults);
+
+          ref.invalidate(specialtiesSearchTextField);
+          ref.invalidate(specialtiesSearchResults);
+
           state = state.copyWith(homePagePath: '/home');
           goRouter.go(state.homePagePath);
           return;
@@ -163,7 +169,6 @@ final routerHandlerProvider =
 final goRouterProvider = Provider<GoRouter>(
   (ref) {
     final authInfo = ref.read(authenticationProvider);
-    print(authInfo);
     return GoRouter(
       initialLocation: authInfo == null ? '/auth' : '/home',
       routes: routes,
@@ -205,6 +210,16 @@ final routes = [
                 child: child,
               ),
               child: const SpecialitiesScreen(),
+            ),
+          ),
+          GoRoute(
+            path: 'search',
+            pageBuilder: (context, state) => CustomTransitionPage(
+              transitionsBuilder: (__, animation, _, child) => FadeTransition(
+                opacity: animation,
+                child: child,
+              ),
+              child: const SearchScreen(),
             ),
           ),
         ],

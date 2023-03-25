@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/consts/outline_input_border.dart';
+
 class MyTextField extends StatelessWidget {
   const MyTextField({
     super.key,
@@ -14,24 +16,23 @@ class MyTextField extends StatelessWidget {
     this.inputAction = TextInputAction.done,
     this.onChanged,
     this.onSubmitted,
+    this.enabled = true,
   });
 
   final TextEditingController controller;
   final ColorScheme colorScheme;
-  final Widget? prefixIcon;
-  final Widget? suffix;
+  final Widget? prefixIcon, suffix;
   final String? Function(String? value)? validator;
-  final void Function(String value)? onChanged;
-  final void Function(String value)? onSubmitted;
-  final bool obscure;
+  final void Function(String value)? onChanged, onSubmitted;
+  final bool obscure, enabled;
   final String label;
   final TextInputType inputType;
   final TextInputAction inputAction;
 
-  // final
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: enabled,
       onFieldSubmitted: onSubmitted,
       onChanged: onChanged,
       controller: controller,
@@ -41,37 +42,16 @@ class MyTextField extends StatelessWidget {
       obscuringCharacter: '•',
       keyboardType: inputType,
       decoration: InputDecoration(
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25),
-          borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.error,
-          ),
-        ),
+        errorBorder: outlineInputBorder(colorScheme.error),
+        enabledBorder: outlineInputBorder(colorScheme.primaryContainer),
+        disabledBorder: outlineInputBorder(Colors.grey),
+        focusedErrorBorder: outlineInputBorder(colorScheme.error),
+        focusedBorder: outlineInputBorder(colorScheme.primaryContainer),
         suffixIcon: suffix,
         prefixIcon: prefixIcon,
         filled: true,
         fillColor: Colors.white,
         labelText: label,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25),
-          borderSide: BorderSide(
-            color: colorScheme.primaryContainer,
-          ),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25),
-          borderSide: BorderSide(
-            color: colorScheme.error,
-            width: 3,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25),
-          borderSide: BorderSide(
-            color: colorScheme.primaryContainer,
-            width: 3,
-          ),
-        ),
         prefixIconColor: colorScheme.primary,
       ),
     );

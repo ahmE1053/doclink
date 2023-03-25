@@ -10,24 +10,41 @@ class PatientRemoteDataSource extends AsyncNotifier<Patient?> {
   Future<Patient?> build() async {
     final user = ref.watch(authenticationProvider);
     if (user != null) {
-      print('fd');
       final patient = await FirebaseFirestore.instance
           .collection('patients')
           .doc(user.uid)
           .get();
       try {
-        print(patient.data());
         Patient.fromJson(patient.data()!);
-      } catch (e) {
-        print(e);
-      }
+      } catch (e) {}
       return Patient.fromJson(patient.data()!);
     } else {
       return null;
     }
   }
+
+  Future<void> handleFavorite(int doctorId) async {
+    final patient = state.value!;
+    final List<int> favoriteDoctors = List.from(patient.favoriteDoctors);
+    final firestoreRef = FirebaseFirestore.instance.collection('patients').doc(
+          patient.id,
+        );
+    if (favoriteDoctors.contains(doctorId)) {
+      favoriteDoctors.remove(doctorId);
+    } else {
+      favoriteDoctors.add(doctorId);
+    }
+    await firestoreRef.update(
+      {'favoriteDoctors': favoriteDoctors},
+    );
+    state = AsyncData(
+      patient.copyWith(
+        favoriteDoctors: favoriteDoctors,
+      ),
+    );
+  }
 }
 
-final remoteDataSourceProvider =
+final patientRemoteDataSourceProvider =
     AsyncNotifierProvider<PatientRemoteDataSource, Patient?>(
         () => PatientRemoteDataSource());

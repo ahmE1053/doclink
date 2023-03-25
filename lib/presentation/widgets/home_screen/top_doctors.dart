@@ -467,7 +467,6 @@ List<OfflineAvailability> generateOffline() {
 }
 
 Future<void> send() async {
-  print('f');
   final ref = FirebaseFirestore.instance.collection('doctors');
   for (var doctor in doctors) {
     await ref.doc(doctor['id']).set(doctor);
