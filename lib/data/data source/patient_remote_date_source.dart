@@ -5,6 +5,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../core/providers/auth_provider.dart';
 import '../../domain/entities/patient.dart';
 
+/*
+* holds the state of the current user
+* return a null state if the user is not signed in and return the
+* user info in the form of a patient class by using the id of the firebase auth user
+* and get the related info of this id from firestore
+* */
+
 class PatientRemoteDataSource extends AsyncNotifier<Patient?> {
   @override
   Future<Patient?> build() async {
@@ -14,14 +21,18 @@ class PatientRemoteDataSource extends AsyncNotifier<Patient?> {
           .collection('patients')
           .doc(user.uid)
           .get();
-      try {
-        Patient.fromJson(patient.data()!);
-      } catch (e) {}
+
+      Patient.fromJson(patient.data()!);
+
       return Patient.fromJson(patient.data()!);
     } else {
       return null;
     }
   }
+
+  /*
+  * handles adding or removing a favorite doctor from the user list
+  * */
 
   Future<void> handleFavorite(int doctorId) async {
     final patient = state.value!;

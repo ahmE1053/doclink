@@ -17,6 +17,10 @@ _$_Doctor _$$_DoctorFromJson(Map<String, dynamic> json) => _$_Doctor(
           .map((e) => Review.fromJson(e as Map<String, dynamic>))
           .toList(),
       rating: (json['rating'] as num).toDouble(),
+      location: ClinicLocation.fromJson(
+          (json['location'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry(k, e as Object),
+      )),
       availableOn: DoctorAvailability.fromJson(
           json['availableOn'] as Map<String, dynamic>),
       doctorState: $enumDecode(_$DoctorStateEnumMap, json['doctorState']),
@@ -31,6 +35,7 @@ Map<String, dynamic> _$$_DoctorToJson(_$_Doctor instance) => <String, dynamic>{
       'joinedOn': instance.joinedOn.toIso8601String(),
       'reviews': instance.reviews.map((e) => e.toJson()).toList(),
       'rating': instance.rating,
+      'location': instance.location.toJson(),
       'availableOn': instance.availableOn.toJson(),
       'doctorState': _$DoctorStateEnumMap[instance.doctorState]!,
     };
@@ -117,4 +122,18 @@ Map<String, dynamic> _$$_OfflineAvailabilityToJson(
       'day': instance.day.toIso8601String(),
       'timeFrom': instance.timeFrom,
       'timeTo': instance.timeTo,
+    };
+
+_$_ClinicLocation _$$_ClinicLocationFromJson(Map<String, dynamic> json) =>
+    _$_ClinicLocation(
+      location: json['location'] as String,
+      coordinates: (json['coordinates'] as List<dynamic>)
+          .map((e) => (e as num).toDouble())
+          .toList(),
+    );
+
+Map<String, dynamic> _$$_ClinicLocationToJson(_$_ClinicLocation instance) =>
+    <String, dynamic>{
+      'location': instance.location,
+      'coordinates': instance.coordinates,
     };

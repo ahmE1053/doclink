@@ -16,6 +16,7 @@ class Doctor with _$Doctor {
     required DateTime joinedOn,
     required List<Review> reviews,
     required double rating,
+    required ClinicLocation location,
     required DoctorAvailability availableOn,
     required DoctorState doctorState,
   }) = _Doctor;
@@ -83,4 +84,14 @@ class OfflineAvailability with _$OfflineAvailability {
 
   factory OfflineAvailability.fromJson(Map<String, Object?> json) =>
       _$OfflineAvailabilityFromJson(json);
+}
+
+@freezed
+class ClinicLocation with _$ClinicLocation {
+  const factory ClinicLocation(
+      {required String location,
+      required List<double> coordinates}) = _ClinicLocation;
+
+  factory ClinicLocation.fromJson(Map<String, Object> json) =>
+      _$ClinicLocationFromJson(json);
 }

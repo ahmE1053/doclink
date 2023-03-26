@@ -6,7 +6,7 @@ import '../../../core/consts/date_of_birth_consts.dart';
 import '../../../core/providers/create_account_provider.dart';
 import '../../widgets/authentication_handling_widgets/account_creation_text_fields.dart';
 import '../../widgets/authentication_handling_widgets/date_of_birth_selection_row.dart';
-import '../../widgets/authentication_handling_widgets/image_selection_page.dart';
+import '../../widgets/authentication_handling_widgets/image_selection_widget.dart';
 import '../../widgets/authentication_handling_widgets/loading_button.dart';
 
 class SignupScreen extends HookConsumerWidget {

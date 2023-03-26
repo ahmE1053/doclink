@@ -1,20 +1,28 @@
 import 'package:doclink/core/consts/app_typography.dart';
+import 'package:doclink/core/providers/router_provider.dart';
+import 'package:doclink/core/utilities/specialties_map.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SpecialityCard extends StatelessWidget {
+class SpecialityCard extends ConsumerWidget {
   const SpecialityCard(
       {Key? key, required this.specialty, required this.colorIndex})
       : super(key: key);
   final Specialty specialty;
   final int colorIndex;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
     return Align(
       child: Material(
         child: InkWell(
           borderRadius: BorderRadius.circular(25),
-          onTap: () {},
+          onTap: () {
+            FocusManager.instance.primaryFocus!.unfocus();
+            ref.read(routerHandlerProvider.notifier).enterNewScreen(
+                  'specialty/${specialty.name}',
+                );
+          },
           child: Ink(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -55,6 +63,7 @@ class SpecialityCard extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text(
                       specialty.simpleName,
+                      textAlign: TextAlign.center,
                       style: AppTypography.bodySize(
                         context,
                         colorScheme.onBackground,
@@ -74,4 +83,8 @@ class SpecialityCard extends StatelessWidget {
 class Specialty {
   final String name, simpleName, imagePath;
   const Specialty(this.name, this.simpleName, this.imagePath);
+  static Specialty fromName(String name) {
+    return Specialty(name, medicalSpecialties[name]!['name']!,
+        medicalSpecialties[name]!['imagePath']!);
+  }
 }

@@ -1,4 +1,8 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doclink/core/utilities/search_functions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -10,6 +14,7 @@ import '../../../core/providers/router_provider.dart';
 import '../../../core/providers/state_providers.dart';
 import '../../../core/utilities/specialties_map.dart';
 import '../../../data/data source/doctor_remote_data_source.dart';
+import '../../../domain/entities/doctor.dart';
 import '../../widgets/home_screen/home_doctor_card.dart';
 import '../../widgets/home_screen/specialty_card.dart';
 import '../../widgets/home_screen/top_doctors.dart';
@@ -40,20 +45,22 @@ class HomeScreen extends HookConsumerWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    FittedBox(
-
-                        // child: Lottie.asset(
-                        //   'assets/lottie/heart.json',
-                        //   fit: BoxFit.fill,
-                        // ),
-                        ),
+                    // FittedBox(
+                    //
+                    //     // child: Lottie.asset(
+                    //     //   'assets/lottie/heart.json',
+                    //     //   fit: BoxFit.fill,
+                    //     // ),
+                    //     ),
                     const SizedBox(width: 10),
-                    FittedBox(
-                      fit: BoxFit.scaleDown,
-                      alignment: Alignment.center,
-                      child: Text(
-                        'DocLink',
-                        style: AppTypography.semiHeadlineSize(context),
+                    Align(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.center,
+                        child: Text(
+                          'DocLink',
+                          style: AppTypography.semiHeadlineSize(context),
+                        ),
                       ),
                     ),
                     Expanded(
@@ -68,7 +75,11 @@ class HomeScreen extends HookConsumerWidget {
                           ),
                           FittedBox(
                             child: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                ref
+                                    .read(routerHandlerProvider.notifier)
+                                    .enterNewScreen('favorites');
+                              },
                               icon: const Icon(Icons.favorite),
                             ),
                           ),
@@ -122,6 +133,8 @@ class HomeScreen extends HookConsumerWidget {
                         ),
                         TextButton(
                           onPressed: () {
+                            FocusManager.instance.primaryFocus!.unfocus();
+
                             ref
                                 .read(routerHandlerProvider.notifier)
                                 .enterNewScreen('specialties');
@@ -136,7 +149,7 @@ class HomeScreen extends HookConsumerWidget {
                       child: GridView.builder(
                         physics: const BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
-                        itemCount: medicalSpecialties.length,
+                        itemCount: 6,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 8,
@@ -166,7 +179,9 @@ class HomeScreen extends HookConsumerWidget {
                           style: AppTypography.semiHeadlineSize(context),
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            FocusManager.instance.primaryFocus!.unfocus();
+                          },
                           child: const Text('See all'),
                         ),
                       ],

@@ -8,8 +8,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../data/data source/patient_remote_date_source.dart';
-import '../widgets/my_list_tile.dart';
+import '../../../data/data source/patient_remote_date_source.dart';
+import '../../widgets/my_list_tile.dart';
 
 class ProfileScreen extends HookConsumerWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -26,6 +26,14 @@ class ProfileScreen extends HookConsumerWidget {
       backgroundColor: theme.colorScheme.background,
       appBar: AppBar(
         title: const Text('Profile'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              ref.read(authenticationProvider.notifier).signOut(context);
+            },
+            icon: const Icon(Icons.logout),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),

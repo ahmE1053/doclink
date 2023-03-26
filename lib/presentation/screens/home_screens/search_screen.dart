@@ -1,14 +1,14 @@
-import 'package:doclink/core/consts/app_typography.dart';
-import 'package:doclink/core/providers/state_providers.dart';
-import 'package:doclink/core/utilities/search_functions.dart';
-import 'package:doclink/data/data%20source/patient_remote_date_source.dart';
-import 'package:doclink/presentation/widgets/authentication_handling_widgets/my_text_field_widget.dart';
-import 'package:doclink/presentation/widgets/home_screen/normal_doctor_card.dart';
-import 'package:doclink/presentation/widgets/search_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../core/providers/state_providers.dart';
+import '../../../core/utilities/search_functions.dart';
+import '../../../data/data source/patient_remote_date_source.dart';
+import '../../widgets/home_screen/normal_doctor_card.dart';
+import '../../widgets/home_screen/not_found.dart';
+import '../../widgets/search_text_field.dart';
 
 class SearchScreen extends HookConsumerWidget {
   const SearchScreen({
@@ -67,21 +67,23 @@ class SearchScreen extends HookConsumerWidget {
                 ),
                 const SizedBox(height: 16),
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: results.length,
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      final doctor = results[index];
-                      final isFav = patient.favoriteDoctors.contains(
-                        int.parse(doctor.id),
-                      );
-                      return NormalDoctorCard(
-                        doctor: doctor,
-                        isFav: isFav,
-                        colorScheme: colorScheme,
-                      );
-                    },
-                  ),
+                  child: results.isEmpty
+                      ? NotFound(mq: mq)
+                      : ListView.builder(
+                          itemCount: results.length,
+                          physics: const BouncingScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            final doctor = results[index];
+                            final isFav = patient.favoriteDoctors.contains(
+                              int.parse(doctor.id),
+                            );
+                            return NormalDoctorCard(
+                              doctor: doctor,
+                              isFav: isFav,
+                              colorScheme: colorScheme,
+                            );
+                          },
+                        ),
                 ),
               ],
             ),

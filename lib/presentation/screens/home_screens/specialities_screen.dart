@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:lottie/lottie.dart';
 
 import '../../../core/providers/state_providers.dart';
 import '../../../core/utilities/search_functions.dart';
+import '../../widgets/home_screen/not_found.dart';
 import '../../widgets/home_screen/specialty_card.dart';
 import '../../widgets/search_text_field.dart';
 
@@ -58,36 +58,15 @@ class SpecialitiesScreen extends HookConsumerWidget {
               const SizedBox(height: 8),
               Expanded(
                 child: specialtiesEntries.isEmpty
-                    ? Center(
-                        child: SizedBox(
-                          height: mq.height * 0.5,
-                          width: mq.width * 0.7,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Lottie.asset(
-                                'assets/lottie/not_found.json',
-                                fit: BoxFit.fill,
-                              ),
-                              const SizedBox(height: 8),
-                              const FittedBox(
-                                child: Text(
-                                  'Your search didn\'t come up \nwith any results',
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
+                    ? NotFound(mq: mq)
                     : GridView.builder(
                         physics: const BouncingScrollPhysics(),
                         itemCount: specialtiesEntries.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           mainAxisSpacing: 8,
                           crossAxisSpacing: 8,
-                          crossAxisCount: 3,
+                          crossAxisCount: 2,
+                          mainAxisExtent: mq.height * 0.15,
                         ),
                         itemBuilder: (context, index) {
                           final specialtyMapEntry =

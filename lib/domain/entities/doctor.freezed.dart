@@ -28,6 +28,7 @@ mixin _$Doctor {
   DateTime get joinedOn => throw _privateConstructorUsedError;
   List<Review> get reviews => throw _privateConstructorUsedError;
   double get rating => throw _privateConstructorUsedError;
+  ClinicLocation get location => throw _privateConstructorUsedError;
   DoctorAvailability get availableOn => throw _privateConstructorUsedError;
   DoctorState get doctorState => throw _privateConstructorUsedError;
 
@@ -50,9 +51,11 @@ abstract class $DoctorCopyWith<$Res> {
       DateTime joinedOn,
       List<Review> reviews,
       double rating,
+      ClinicLocation location,
       DoctorAvailability availableOn,
       DoctorState doctorState});
 
+  $ClinicLocationCopyWith<$Res> get location;
   $DoctorAvailabilityCopyWith<$Res> get availableOn;
 }
 
@@ -77,6 +80,7 @@ class _$DoctorCopyWithImpl<$Res, $Val extends Doctor>
     Object? joinedOn = null,
     Object? reviews = null,
     Object? rating = null,
+    Object? location = null,
     Object? availableOn = null,
     Object? doctorState = null,
   }) {
@@ -113,6 +117,10 @@ class _$DoctorCopyWithImpl<$Res, $Val extends Doctor>
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
               as double,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as ClinicLocation,
       availableOn: null == availableOn
           ? _value.availableOn
           : availableOn // ignore: cast_nullable_to_non_nullable
@@ -122,6 +130,14 @@ class _$DoctorCopyWithImpl<$Res, $Val extends Doctor>
           : doctorState // ignore: cast_nullable_to_non_nullable
               as DoctorState,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ClinicLocationCopyWith<$Res> get location {
+    return $ClinicLocationCopyWith<$Res>(_value.location, (value) {
+      return _then(_value.copyWith(location: value) as $Val);
+    });
   }
 
   @override
@@ -148,9 +164,12 @@ abstract class _$$_DoctorCopyWith<$Res> implements $DoctorCopyWith<$Res> {
       DateTime joinedOn,
       List<Review> reviews,
       double rating,
+      ClinicLocation location,
       DoctorAvailability availableOn,
       DoctorState doctorState});
 
+  @override
+  $ClinicLocationCopyWith<$Res> get location;
   @override
   $DoctorAvailabilityCopyWith<$Res> get availableOn;
 }
@@ -173,6 +192,7 @@ class __$$_DoctorCopyWithImpl<$Res>
     Object? joinedOn = null,
     Object? reviews = null,
     Object? rating = null,
+    Object? location = null,
     Object? availableOn = null,
     Object? doctorState = null,
   }) {
@@ -209,6 +229,10 @@ class __$$_DoctorCopyWithImpl<$Res>
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
               as double,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as ClinicLocation,
       availableOn: null == availableOn
           ? _value.availableOn
           : availableOn // ignore: cast_nullable_to_non_nullable
@@ -234,6 +258,7 @@ class _$_Doctor implements _Doctor {
       required this.joinedOn,
       required final List<Review> reviews,
       required this.rating,
+      required this.location,
       required this.availableOn,
       required this.doctorState})
       : _reviews = reviews;
@@ -264,13 +289,15 @@ class _$_Doctor implements _Doctor {
   @override
   final double rating;
   @override
+  final ClinicLocation location;
+  @override
   final DoctorAvailability availableOn;
   @override
   final DoctorState doctorState;
 
   @override
   String toString() {
-    return 'Doctor(id: $id, name: $name, imageUrl: $imageUrl, speciality: $speciality, aboutDoctor: $aboutDoctor, joinedOn: $joinedOn, reviews: $reviews, rating: $rating, availableOn: $availableOn, doctorState: $doctorState)';
+    return 'Doctor(id: $id, name: $name, imageUrl: $imageUrl, speciality: $speciality, aboutDoctor: $aboutDoctor, joinedOn: $joinedOn, reviews: $reviews, rating: $rating, location: $location, availableOn: $availableOn, doctorState: $doctorState)';
   }
 
   @override
@@ -290,6 +317,8 @@ class _$_Doctor implements _Doctor {
                 other.joinedOn == joinedOn) &&
             const DeepCollectionEquality().equals(other._reviews, _reviews) &&
             (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
             (identical(other.availableOn, availableOn) ||
                 other.availableOn == availableOn) &&
             (identical(other.doctorState, doctorState) ||
@@ -308,6 +337,7 @@ class _$_Doctor implements _Doctor {
       joinedOn,
       const DeepCollectionEquality().hash(_reviews),
       rating,
+      location,
       availableOn,
       doctorState);
 
@@ -335,6 +365,7 @@ abstract class _Doctor implements Doctor {
       required final DateTime joinedOn,
       required final List<Review> reviews,
       required final double rating,
+      required final ClinicLocation location,
       required final DoctorAvailability availableOn,
       required final DoctorState doctorState}) = _$_Doctor;
 
@@ -356,6 +387,8 @@ abstract class _Doctor implements Doctor {
   List<Review> get reviews;
   @override
   double get rating;
+  @override
+  ClinicLocation get location;
   @override
   DoctorAvailability get availableOn;
   @override
@@ -1238,5 +1271,169 @@ abstract class _OfflineAvailability implements OfflineAvailability {
   @override
   @JsonKey(ignore: true)
   _$$_OfflineAvailabilityCopyWith<_$_OfflineAvailability> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ClinicLocation _$ClinicLocationFromJson(Map<String, dynamic> json) {
+  return _ClinicLocation.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ClinicLocation {
+  String get location => throw _privateConstructorUsedError;
+  List<double> get coordinates => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ClinicLocationCopyWith<ClinicLocation> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ClinicLocationCopyWith<$Res> {
+  factory $ClinicLocationCopyWith(
+          ClinicLocation value, $Res Function(ClinicLocation) then) =
+      _$ClinicLocationCopyWithImpl<$Res, ClinicLocation>;
+  @useResult
+  $Res call({String location, List<double> coordinates});
+}
+
+/// @nodoc
+class _$ClinicLocationCopyWithImpl<$Res, $Val extends ClinicLocation>
+    implements $ClinicLocationCopyWith<$Res> {
+  _$ClinicLocationCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? location = null,
+    Object? coordinates = null,
+  }) {
+    return _then(_value.copyWith(
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      coordinates: null == coordinates
+          ? _value.coordinates
+          : coordinates // ignore: cast_nullable_to_non_nullable
+              as List<double>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ClinicLocationCopyWith<$Res>
+    implements $ClinicLocationCopyWith<$Res> {
+  factory _$$_ClinicLocationCopyWith(
+          _$_ClinicLocation value, $Res Function(_$_ClinicLocation) then) =
+      __$$_ClinicLocationCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String location, List<double> coordinates});
+}
+
+/// @nodoc
+class __$$_ClinicLocationCopyWithImpl<$Res>
+    extends _$ClinicLocationCopyWithImpl<$Res, _$_ClinicLocation>
+    implements _$$_ClinicLocationCopyWith<$Res> {
+  __$$_ClinicLocationCopyWithImpl(
+      _$_ClinicLocation _value, $Res Function(_$_ClinicLocation) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? location = null,
+    Object? coordinates = null,
+  }) {
+    return _then(_$_ClinicLocation(
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      coordinates: null == coordinates
+          ? _value._coordinates
+          : coordinates // ignore: cast_nullable_to_non_nullable
+              as List<double>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ClinicLocation implements _ClinicLocation {
+  const _$_ClinicLocation(
+      {required this.location, required final List<double> coordinates})
+      : _coordinates = coordinates;
+
+  factory _$_ClinicLocation.fromJson(Map<String, dynamic> json) =>
+      _$$_ClinicLocationFromJson(json);
+
+  @override
+  final String location;
+  final List<double> _coordinates;
+  @override
+  List<double> get coordinates {
+    if (_coordinates is EqualUnmodifiableListView) return _coordinates;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_coordinates);
+  }
+
+  @override
+  String toString() {
+    return 'ClinicLocation(location: $location, coordinates: $coordinates)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ClinicLocation &&
+            (identical(other.location, location) ||
+                other.location == location) &&
+            const DeepCollectionEquality()
+                .equals(other._coordinates, _coordinates));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, location, const DeepCollectionEquality().hash(_coordinates));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ClinicLocationCopyWith<_$_ClinicLocation> get copyWith =>
+      __$$_ClinicLocationCopyWithImpl<_$_ClinicLocation>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ClinicLocationToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ClinicLocation implements ClinicLocation {
+  const factory _ClinicLocation(
+      {required final String location,
+      required final List<double> coordinates}) = _$_ClinicLocation;
+
+  factory _ClinicLocation.fromJson(Map<String, dynamic> json) =
+      _$_ClinicLocation.fromJson;
+
+  @override
+  String get location;
+  @override
+  List<double> get coordinates;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ClinicLocationCopyWith<_$_ClinicLocation> get copyWith =>
       throw _privateConstructorUsedError;
 }

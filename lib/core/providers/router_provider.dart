@@ -1,7 +1,10 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:doclink/core/providers/auth_provider.dart';
 import 'package:doclink/core/providers/state_providers.dart';
+import 'package:doclink/presentation/screens/home_screens/doctor_info_screen.dart';
+import 'package:doclink/presentation/screens/home_screens/favorite_doctors_screen.dart';
 import 'package:doclink/presentation/screens/home_screens/search_screen.dart';
+import 'package:doclink/presentation/screens/home_screens/specialty_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
@@ -203,6 +206,16 @@ final routes = [
         ),
         routes: [
           GoRoute(
+            path: 'doctor/:id',
+            pageBuilder: (context, state) => CustomTransitionPage(
+              transitionsBuilder: (__, animation, _, child) => FadeTransition(
+                opacity: animation,
+                child: child,
+              ),
+              child: DoctorInfoScreen(id: state.params['id']!),
+            ),
+          ),
+          GoRoute(
             path: 'specialties',
             pageBuilder: (context, state) => CustomTransitionPage(
               transitionsBuilder: (__, animation, _, child) => FadeTransition(
@@ -210,6 +223,40 @@ final routes = [
                 child: child,
               ),
               child: const SpecialitiesScreen(),
+            ),
+            routes: [
+              GoRoute(
+                path: 'specialty/:specialty',
+                pageBuilder: (context, state) => CustomTransitionPage(
+                  transitionsBuilder: (__, animation, _, child) =>
+                      FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  ),
+                  child: SpecialtyScreen(
+                      specialtyName: state.params['specialty']!),
+                ),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: 'favorites',
+            pageBuilder: (context, state) => CustomTransitionPage(
+              transitionsBuilder: (__, animation, _, child) => FadeTransition(
+                opacity: animation,
+                child: child,
+              ),
+              child: const FavoriteDoctorsScreen(),
+            ),
+          ),
+          GoRoute(
+            path: 'specialty/:specialty',
+            pageBuilder: (context, state) => CustomTransitionPage(
+              transitionsBuilder: (__, animation, _, child) => FadeTransition(
+                opacity: animation,
+                child: child,
+              ),
+              child: SpecialtyScreen(specialtyName: state.params['specialty']!),
             ),
           ),
           GoRoute(

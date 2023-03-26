@@ -8,6 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../providers/state_providers.dart';
 import 'specialties_map.dart';
 
+//this uses a brute force algorithm with a big o ((n+m)*k)
 void searchForSpecialties(
     WidgetRef ref, TextEditingController searchController) {
   final results = <String, Map<String, String>>{};
@@ -53,6 +54,7 @@ void searchForSpecialties(
   ref.read(specialtiesSearchResults.notifier).update((state) => results);
 }
 
+//this uses a binary search with big o(log(n)+m)
 void searchForDoctors(WidgetRef ref, TextEditingController searchController) {
   final results = <Doctor>[];
   final searchText = searchController.value.text.toLowerCase();
@@ -61,15 +63,33 @@ void searchForDoctors(WidgetRef ref, TextEditingController searchController) {
       (a, b) => a.name.compareTo(b.name),
     );
 
+  /*
+  * a pointer for the start of the list, end of it and the location of the first matched index
+  * this is used with the last matched index which is defined down below
+  * to iterates through the items in between which may contain the search text in any part of the name
+  */
+
   int low = 0, high = doctorsList.length - 1, firstMatchedIndex = -1;
 
   while (low <= high) {
+    /*
+    * creates a pointer to the middle of the list and in subsequent loop the middle of the
+    * low and high indexes then checks if the mid points to a text that contains the search text
+    * if it does it points to firstMatchedIndex to it and starts again to see if there was an earlier
+    * match
+    */
     int mid = (low + high) ~/ 2;
+
     bool contains = doctorsList[mid].name.toLowerCase().contains(searchText);
     if (contains) {
       firstMatchedIndex = mid;
       high = mid - 1;
     } else {
+      /*
+      * the positive comparison value indicates that the doctor name is after the
+      * search text then we need to move the high pointer before the mid and try again
+      * if not then the low will be after the mid
+      * */
       int comparison =
           doctorsList[mid].name.toLowerCase().compareTo(searchText);
       if (comparison > 0) {
@@ -80,9 +100,15 @@ void searchForDoctors(WidgetRef ref, TextEditingController searchController) {
     }
   }
 
+  //no matches found
   if (firstMatchedIndex == -1) {
+    ref.read(doctorSearchResults.notifier).update((state) => results);
     return;
   }
+  /*
+  * if there was a match found then the firstMatchedIndex has to be the first
+  * in the list we do the same thing but this time use it to determine the lastMatchedIndex
+  * */
   low = 0;
   high = doctorsList.length - 1;
   int lastMatchedIndex = -1;
@@ -109,6 +135,9 @@ void searchForDoctors(WidgetRef ref, TextEditingController searchController) {
     return;
   }
 
+  /*
+  * check the values between the first and last index and add the values the contain the search text
+  * */
   for (int i = firstMatchedIndex;
       i <= min(lastMatchedIndex, lastMatchedIndex + 10);
       i++) {
@@ -117,6 +146,9 @@ void searchForDoctors(WidgetRef ref, TextEditingController searchController) {
     }
   }
 
+  /*
+  * sorts the list to make the names that start with the name first
+  * */
   results.sort(
     (a, b) => a.name.toLowerCase().compareTo(searchText),
   );

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../consts/date_of_birth_consts.dart';
 
+///Used to determine if february will be 28 or 29 days
+///it modifies the notifiers directly
 void leapYearCalculator(ValueNotifier<List<int?>> dateOfBirth,
     ValueNotifier<List<int>> daySelectionList) {
   final DOB = dateOfBirth.value;
@@ -13,6 +15,7 @@ void leapYearCalculator(ValueNotifier<List<int?>> dateOfBirth,
       month == 2) {
     daySelectionList.value = List.from(
       days.map((e) {
+        //this modifies the number of days in the month not the last day of it
         if (e == 28) {
           return 29;
         } else {

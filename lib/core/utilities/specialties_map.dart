@@ -1,5 +1,6 @@
+//A map that holds the specialties with their complex and simple name and the path to the related image
 Map<String, Map<String, String>> medicalSpecialties = {
-  'anesthesia': {
+  'Anesthesiology': {
     'name': 'Anesthesiologist ',
     'imagePath': 'assets/specialties/anesthesia.png',
   },
@@ -15,9 +16,17 @@ Map<String, Map<String, String>> medicalSpecialties = {
     'name': 'Hormone doctor',
     'imagePath': 'assets/specialties/endocrinology.png',
   },
+  'Emergency Medicine': {
+    'name': 'Emergency doctor',
+    'imagePath': 'assets/specialties/medicine.png',
+  },
   'Gastroenterology': {
     'name': 'Digestive doctor',
     'imagePath': 'assets/specialties/gastroenterology.png',
+  },
+  'Gynecology': {
+    'name': 'Gynecologist',
+    'imagePath': 'assets/specialties/gynecology.png',
   },
   'Hematology': {
     'name': 'Blood doctor',
@@ -26,6 +35,10 @@ Map<String, Map<String, String>> medicalSpecialties = {
   'Infectious Disease': {
     'name': 'Infection doctor',
     'imagePath': 'assets/specialties/infectious_disease.png',
+  },
+  'Neurology': {
+    'name': 'Neurology',
+    'imagePath': 'assets/specialties/neurology.png',
   },
   'Oncology': {
     'name': 'Cancer doctor',
@@ -66,10 +79,6 @@ Map<String, Map<String, String>> medicalSpecialties = {
   'Surgery': {
     'name': 'Surgeon',
     'imagePath': 'assets/specialties/surgery.png',
-  },
-  'Emergency Medicine': {
-    'name': 'Emergency doctor',
-    'imagePath': 'assets/specialties/medicine.png',
   },
   'Love': {
     'name': 'Love Doctor',
