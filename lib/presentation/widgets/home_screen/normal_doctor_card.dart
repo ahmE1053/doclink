@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:doclink/core/providers/router_provider.dart';
 import 'package:doclink/core/utilities/specialties_map.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -31,7 +32,11 @@ class NormalDoctorCard extends ConsumerWidget {
       margin: const EdgeInsets.only(bottom: 8),
       child: Material(
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            ref
+                .read(routerHandlerProvider.notifier)
+                .enterNewScreen('doctor/${doctor.id}');
+          },
           borderRadius: BorderRadius.circular(25),
           child: Ink(
             padding: const EdgeInsets.all(20),
@@ -52,9 +57,12 @@ class NormalDoctorCard extends ConsumerWidget {
                         borderRadius: BorderRadius.circular(25),
                         child: AspectRatio(
                           aspectRatio: 1 / 1,
-                          child: CachedNetworkImage(
-                            imageUrl: doctor.imageUrl,
-                            fit: BoxFit.fill,
+                          child: Hero(
+                            tag: doctor.id,
+                            child: CachedNetworkImage(
+                              imageUrl: doctor.imageUrl,
+                              fit: BoxFit.fill,
+                            ),
                           ),
                         ),
                       ),

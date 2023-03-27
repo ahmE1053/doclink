@@ -236,6 +236,19 @@ final routes = [
                   child: SpecialtyScreen(
                       specialtyName: state.params['specialty']!),
                 ),
+                routes: [
+                  GoRoute(
+                    path: 'doctor/:id',
+                    pageBuilder: (context, state) => CustomTransitionPage(
+                      transitionsBuilder: (__, animation, _, child) =>
+                          FadeTransition(
+                        opacity: animation,
+                        child: child,
+                      ),
+                      child: DoctorInfoScreen(id: state.params['id']!),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -248,6 +261,19 @@ final routes = [
               ),
               child: const FavoriteDoctorsScreen(),
             ),
+            routes: [
+              GoRoute(
+                path: 'doctor/:id',
+                pageBuilder: (context, state) => CustomTransitionPage(
+                  transitionsBuilder: (__, animation, _, child) =>
+                      FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  ),
+                  child: DoctorInfoScreen(id: state.params['id']!),
+                ),
+              ),
+            ],
           ),
           GoRoute(
             path: 'specialty/:specialty',
@@ -258,6 +284,19 @@ final routes = [
               ),
               child: SpecialtyScreen(specialtyName: state.params['specialty']!),
             ),
+            routes: [
+              GoRoute(
+                path: 'doctor/:id',
+                pageBuilder: (context, state) => CustomTransitionPage(
+                  transitionsBuilder: (__, animation, _, child) =>
+                      FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  ),
+                  child: DoctorInfoScreen(id: state.params['id']!),
+                ),
+              ),
+            ],
           ),
           GoRoute(
             path: 'search',
@@ -268,6 +307,19 @@ final routes = [
               ),
               child: const SearchScreen(),
             ),
+            routes: [
+              GoRoute(
+                path: 'doctor/:id',
+                pageBuilder: (context, state) => CustomTransitionPage(
+                  transitionsBuilder: (__, animation, _, child) =>
+                      FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  ),
+                  child: DoctorInfoScreen(id: state.params['id']!),
+                ),
+              ),
+            ],
           ),
         ],
       ),
