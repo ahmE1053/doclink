@@ -38,7 +38,7 @@ migrate_working_dir/
 /test/
 /web/
 /windows/
-
+/lib/core/utilities/open_maps_app.dart
 # Symbolication related
 app.*.symbols
 
