@@ -17,7 +17,7 @@ class AppTypography {
       );
 
   static TextStyle bodySize(BuildContext context, [Color? color]) => TextStyle(
-        fontSize: MediaQuery.of(context).size.height * 0.05,
+        fontSize: MediaQuery.of(context).size.width * 0.055,
         color: color ?? Colors.black,
       );
 

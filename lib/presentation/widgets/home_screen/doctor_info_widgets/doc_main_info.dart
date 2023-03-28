@@ -53,7 +53,7 @@ class DocMainInfo extends StatelessWidget {
                       'Dr. ${doctor.name}',
                       style: AppTypography.semiHeadlineSize(
                         context,
-                        colorScheme.primary,
+                        colorScheme.surfaceTint,
                       ),
                     ),
                   ),

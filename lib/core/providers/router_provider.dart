@@ -1,4 +1,3 @@
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:doclink/core/providers/auth_provider.dart';
 import 'package:doclink/core/providers/state_providers.dart';
 import 'package:doclink/presentation/screens/home_screens/doctor_info_screen.dart';
@@ -40,12 +39,12 @@ class RouterHandler with _$RouterHandler {
     required String messagesPagePath,
     required String profilePagePath,
     required int oldIndex,
+    required int currentIndex,
   }) = _RouterHandler;
 }
 
 class RouterHandlerNotifier extends Notifier<RouterHandler> {
   late GoRouter goRouter;
-  final convexBottomBarKey = GlobalKey<ConvexAppBarState>();
 
   /*
   * this is the build method it is supposed to run only once during the initial run of the application
@@ -72,6 +71,7 @@ class RouterHandlerNotifier extends Notifier<RouterHandler> {
       messagesPagePath: '/messages',
       profilePagePath: '/profile',
       oldIndex: 0,
+      currentIndex: 0,
     );
   }
 
@@ -89,8 +89,7 @@ class RouterHandlerNotifier extends Notifier<RouterHandler> {
 
           ref.invalidate(specialtiesSearchTextField);
           ref.invalidate(specialtiesSearchResults);
-
-          state = state.copyWith(homePagePath: '/home');
+          state = state.copyWith(homePagePath: '/home', currentIndex: index);
           goRouter.go(state.homePagePath);
           return;
         }
@@ -102,7 +101,8 @@ class RouterHandlerNotifier extends Notifier<RouterHandler> {
         break;
       case (1):
         if (state.oldIndex == index) {
-          state = state.copyWith(appointmentsPagePath: '/appointments');
+          state = state.copyWith(
+              appointmentsPagePath: '/appointments', currentIndex: index);
           return;
         }
         saveOldPageState(index);
@@ -110,7 +110,8 @@ class RouterHandlerNotifier extends Notifier<RouterHandler> {
         break;
       case (2):
         if (state.oldIndex == index) {
-          state = state.copyWith(messagesPagePath: '/messages');
+          state = state.copyWith(
+              messagesPagePath: '/messages', currentIndex: index);
           return;
         }
 
@@ -119,7 +120,8 @@ class RouterHandlerNotifier extends Notifier<RouterHandler> {
         break;
       case (3):
         if (state.oldIndex == index) {
-          state = state.copyWith(profilePagePath: '/profile');
+          state =
+              state.copyWith(profilePagePath: '/profile', currentIndex: index);
           return;
         }
 
@@ -141,20 +143,29 @@ class RouterHandlerNotifier extends Notifier<RouterHandler> {
   void saveOldPageState(int index) {
     switch (state.oldIndex) {
       case (0):
-        state =
-            state.copyWith(oldIndex: index, homePagePath: goRouter.location);
+        state = state.copyWith(
+            oldIndex: index,
+            homePagePath: goRouter.location,
+            currentIndex: index);
         break;
       case (1):
         state = state.copyWith(
-            appointmentsPagePath: goRouter.location, oldIndex: index);
+            appointmentsPagePath: goRouter.location,
+            oldIndex: index,
+            currentIndex: index);
         break;
       case (2):
         state = state.copyWith(
-            oldIndex: index, messagesPagePath: goRouter.location);
+            oldIndex: index,
+            messagesPagePath: goRouter.location,
+            currentIndex: index);
         break;
       case (3):
-        state =
-            state.copyWith(oldIndex: index, profilePagePath: goRouter.location);
+        state = state.copyWith(
+          oldIndex: index,
+          profilePagePath: goRouter.location,
+          currentIndex: index,
+        );
         break;
     }
   }

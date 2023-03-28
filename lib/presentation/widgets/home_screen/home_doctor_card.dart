@@ -19,6 +19,7 @@ class HomeDoctorCard extends ConsumerWidget {
           ..sort(
             (a, b) => b.rating.compareTo(a.rating),
           );
+
         final doctorsList = sortedList.take(6).toList();
         return GridView.builder(
           physics: const BouncingScrollPhysics(),

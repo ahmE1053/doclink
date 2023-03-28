@@ -46,12 +46,11 @@ class HomeScreen extends HookConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     // FittedBox(
-                    //
-                    //     // child: Lottie.asset(
-                    //     //   'assets/lottie/heart.json',
-                    //     //   fit: BoxFit.fill,
-                    //     // ),
-                    //     ),
+                    //   child: Lottie.asset(
+                    //     'assets/lottie/heart.json',
+                    //     fit: BoxFit.fill,
+                    //   ),
+                    // ),
                     const SizedBox(width: 10),
                     Align(
                       child: FittedBox(

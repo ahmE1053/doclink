@@ -30,7 +30,6 @@ class DoctorRemoteDataSource extends AsyncNotifier<List<Doctor>> {
         if (int.parse(doctor.id) == id) list.add(doctor);
       }
     }
-    log(list.map((e) => e.name).toString());
     return list;
   }
 }

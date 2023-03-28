@@ -44,7 +44,6 @@ class SpecialtyScreen extends ConsumerWidget {
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
                           final doctor = doctorsList[index];
-                          log(doctor.toString());
                           return NormalDoctorCard(
                             doctor: doctor,
                             isFav: ref

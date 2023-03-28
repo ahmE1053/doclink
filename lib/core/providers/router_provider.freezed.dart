@@ -21,6 +21,7 @@ mixin _$RouterHandler {
   String get messagesPagePath => throw _privateConstructorUsedError;
   String get profilePagePath => throw _privateConstructorUsedError;
   int get oldIndex => throw _privateConstructorUsedError;
+  int get currentIndex => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RouterHandlerCopyWith<RouterHandler> get copyWith =>
@@ -38,7 +39,8 @@ abstract class $RouterHandlerCopyWith<$Res> {
       String appointmentsPagePath,
       String messagesPagePath,
       String profilePagePath,
-      int oldIndex});
+      int oldIndex,
+      int currentIndex});
 }
 
 /// @nodoc
@@ -59,6 +61,7 @@ class _$RouterHandlerCopyWithImpl<$Res, $Val extends RouterHandler>
     Object? messagesPagePath = null,
     Object? profilePagePath = null,
     Object? oldIndex = null,
+    Object? currentIndex = null,
   }) {
     return _then(_value.copyWith(
       homePagePath: null == homePagePath
@@ -81,6 +84,10 @@ class _$RouterHandlerCopyWithImpl<$Res, $Val extends RouterHandler>
           ? _value.oldIndex
           : oldIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      currentIndex: null == currentIndex
+          ? _value.currentIndex
+          : currentIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -98,7 +105,8 @@ abstract class _$$_RouterHandlerCopyWith<$Res>
       String appointmentsPagePath,
       String messagesPagePath,
       String profilePagePath,
-      int oldIndex});
+      int oldIndex,
+      int currentIndex});
 }
 
 /// @nodoc
@@ -117,6 +125,7 @@ class __$$_RouterHandlerCopyWithImpl<$Res>
     Object? messagesPagePath = null,
     Object? profilePagePath = null,
     Object? oldIndex = null,
+    Object? currentIndex = null,
   }) {
     return _then(_$_RouterHandler(
       homePagePath: null == homePagePath
@@ -139,6 +148,10 @@ class __$$_RouterHandlerCopyWithImpl<$Res>
           ? _value.oldIndex
           : oldIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      currentIndex: null == currentIndex
+          ? _value.currentIndex
+          : currentIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -151,7 +164,8 @@ class _$_RouterHandler implements _RouterHandler {
       required this.appointmentsPagePath,
       required this.messagesPagePath,
       required this.profilePagePath,
-      required this.oldIndex});
+      required this.oldIndex,
+      required this.currentIndex});
 
   @override
   final String homePagePath;
@@ -163,10 +177,12 @@ class _$_RouterHandler implements _RouterHandler {
   final String profilePagePath;
   @override
   final int oldIndex;
+  @override
+  final int currentIndex;
 
   @override
   String toString() {
-    return 'RouterHandler(homePagePath: $homePagePath, appointmentsPagePath: $appointmentsPagePath, messagesPagePath: $messagesPagePath, profilePagePath: $profilePagePath, oldIndex: $oldIndex)';
+    return 'RouterHandler(homePagePath: $homePagePath, appointmentsPagePath: $appointmentsPagePath, messagesPagePath: $messagesPagePath, profilePagePath: $profilePagePath, oldIndex: $oldIndex, currentIndex: $currentIndex)';
   }
 
   @override
@@ -183,12 +199,20 @@ class _$_RouterHandler implements _RouterHandler {
             (identical(other.profilePagePath, profilePagePath) ||
                 other.profilePagePath == profilePagePath) &&
             (identical(other.oldIndex, oldIndex) ||
-                other.oldIndex == oldIndex));
+                other.oldIndex == oldIndex) &&
+            (identical(other.currentIndex, currentIndex) ||
+                other.currentIndex == currentIndex));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, homePagePath,
-      appointmentsPagePath, messagesPagePath, profilePagePath, oldIndex);
+  int get hashCode => Object.hash(
+      runtimeType,
+      homePagePath,
+      appointmentsPagePath,
+      messagesPagePath,
+      profilePagePath,
+      oldIndex,
+      currentIndex);
 
   @JsonKey(ignore: true)
   @override
@@ -203,7 +227,8 @@ abstract class _RouterHandler implements RouterHandler {
       required final String appointmentsPagePath,
       required final String messagesPagePath,
       required final String profilePagePath,
-      required final int oldIndex}) = _$_RouterHandler;
+      required final int oldIndex,
+      required final int currentIndex}) = _$_RouterHandler;
 
   @override
   String get homePagePath;
@@ -215,6 +240,8 @@ abstract class _RouterHandler implements RouterHandler {
   String get profilePagePath;
   @override
   int get oldIndex;
+  @override
+  int get currentIndex;
   @override
   @JsonKey(ignore: true)
   _$$_RouterHandlerCopyWith<_$_RouterHandler> get copyWith =>

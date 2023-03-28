@@ -1,11 +1,12 @@
+import 'package:doclink/core/utilities/open_maps_app.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../domain/entities/doctor.dart';
 
-class MyGoogleMapWidget extends StatelessWidget {
+class MyGoogleMapWidget extends HookWidget {
   const MyGoogleMapWidget({
     super.key,
     required this.doctorClinicPosition,
@@ -19,65 +20,61 @@ class MyGoogleMapWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GoogleMap(
-      onTap: (argument) async {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Open the maps app'),
-            actions: [
-              TextButton(
-                onPressed: () async {
-                  final url = Uri(
-                    scheme: 'geo',
-                    path:
-                        '${doctorClinicPosition.latitude},${doctorClinicPosition.longitude}',
-                    queryParameters: {
-                      'q':
-                          '${doctorClinicPosition.latitude},${doctorClinicPosition.longitude}',
-                    },
-                  );
-                  if (await canLaunchUrl(url)) {
-                    launchUrl(url);
-                    context.pop();
-                  } else {
-                    if (context.mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Can\'t open maps app'),
-                        ),
-                      );
-                      context.pop();
-                    }
-                  }
-                },
-                child: const Text('Yes'),
+    final dioRequest = useMemoized(
+      () => getMap(doctor.location),
+    );
+    final imageData = useFuture(dioRequest);
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(25),
+      child: Builder(
+        builder: (context) {
+          if (imageData.data == null) {
+            return Center(
+              child: SpinKitDoubleBounce(
+                color: Theme.of(context).colorScheme.primaryContainer,
               ),
-              TextButton(
-                onPressed: () {
-                  context.pop();
-                },
-                child: const Text('No'),
-              )
-            ],
-          ),
-        );
-      },
-      zoomControlsEnabled: false,
-      onMapCreated: (controller) => mapController.value = controller,
-      markers: {
-        Marker(
-          markerId: MarkerId(doctor.id),
-          position: doctorClinicPosition,
-        )
-      },
-      zoomGesturesEnabled: false,
-      buildingsEnabled: false,
-      scrollGesturesEnabled: false,
-      initialCameraPosition: CameraPosition(
-        target: doctorClinicPosition,
-        zoom: 16,
+            );
+          }
+          return GestureDetector(
+            onTap: () {
+              openMapsApp(context, doctorClinicPosition);
+            },
+            child: Image.memory(
+              imageData.data!,
+              fit: BoxFit.fill,
+            ),
+          );
+        },
       ),
+      // child: GoogleMap(
+      //   zoomControlsEnabled: false,
+      //   onMapCreated: (controller) => mapController.value = controller,
+      //   mapToolbarEnabled: false,
+      //   markers: {
+      //     Marker(
+      //       infoWindow: InfoWindow(title: doctor.location.location),
+      //       consumeTapEvents: false,
+      //       // onTap: () {
+      //       //   openMapsApp(context, doctorClinicPosition);
+      //       // },
+      //       markerId: MarkerId(doctor.id),
+      //       position: doctorClinicPosition,
+      //       icon: BitmapDescriptor.defaultMarkerWithHue(
+      //         BitmapDescriptor.hueAzure,
+      //       ),
+      //     )
+      //   },
+      //   zoomGesturesEnabled: false,
+      //   buildingsEnabled: false,
+      //   scrollGesturesEnabled: false,
+      //   initialCameraPosition: CameraPosition(
+      //     target: doctorClinicPosition,
+      //     zoom: 16,
+      //   ),
+      //   onTap: (argument) {
+      //     openMapsApp(context, doctorClinicPosition);
+      //   },
+      // ),
     );
   }
 }
