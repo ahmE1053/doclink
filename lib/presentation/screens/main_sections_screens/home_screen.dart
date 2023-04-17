@@ -30,6 +30,7 @@ class HomeScreen extends HookConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     final formKey = useMemoized(() => GlobalKey<FormState>());
+    print('hello this is a me mario');
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {

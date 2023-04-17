@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../core/consts/images.dart';
+
 class FavoriteDoctorsScreen extends HookConsumerWidget {
   const FavoriteDoctorsScreen({
     Key? key,
@@ -27,18 +29,33 @@ class FavoriteDoctorsScreen extends HookConsumerWidget {
         title: const Text('Favorite Doctors'),
         actions: [
           IconButton(
-              onPressed: () {
-                FirebaseFirestore.instance
-                    .collection('patients')
-                    .doc(FirebaseAuth.instance.currentUser!.uid)
-                    .update(
-                  {
-                    'favoriteDoctors':
-                        ref.read(doctorsNotifierProvider).value!.map(
-                              (e) => int.parse(e.id),
-                            ),
-                  },
-                );
+              onPressed: () async {
+                var list = (await FirebaseFirestore.instance
+                        .collection('doctors')
+                        .get())
+                    .docs;
+
+                for (int i = 0; i < list.length; i++) {
+                  if (list[i].data()['name'] == 'Esraa Saber') {
+                    await FirebaseFirestore.instance
+                        .collection('doctors')
+                        .doc('${list[i].data()['id']}')
+                        .update(
+                      {
+                        'imageUrl':
+                            'https://firebasestorage.googleapis.com/v0/b/doclink-d30a3.appspot.com/o/10.out.png?alt=media&token=d7a10b88-e1c9-4a3a-a321-b807c342e374',
+                      },
+                    );
+                  }
+                  // await FirebaseFirestore.instance
+                  //     .collection('doctors')
+                  //     .doc('${list[i].data()['id']}')
+                  //     .update(
+                  //   {
+                  //     'imageUrl': doctors123456789[i % doctors123456789.length],
+                  //   },
+                  // );
+                }
               },
               icon: const Icon(Icons.h_mobiledata))
         ],

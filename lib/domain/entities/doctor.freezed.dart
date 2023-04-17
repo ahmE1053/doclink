@@ -248,7 +248,7 @@ class __$$_DoctorCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$_Doctor implements _Doctor {
+class _$_Doctor extends _Doctor {
   const _$_Doctor(
       {required this.id,
       required this.name,
@@ -261,7 +261,8 @@ class _$_Doctor implements _Doctor {
       required this.location,
       required this.availableOn,
       required this.doctorState})
-      : _reviews = reviews;
+      : _reviews = reviews,
+        super._();
 
   factory _$_Doctor.fromJson(Map<String, dynamic> json) =>
       _$$_DoctorFromJson(json);
@@ -355,7 +356,7 @@ class _$_Doctor implements _Doctor {
   }
 }
 
-abstract class _Doctor implements Doctor {
+abstract class _Doctor extends Doctor {
   const factory _Doctor(
       {required final String id,
       required final String name,
@@ -368,6 +369,7 @@ abstract class _Doctor implements Doctor {
       required final ClinicLocation location,
       required final DoctorAvailability availableOn,
       required final DoctorState doctorState}) = _$_Doctor;
+  const _Doctor._() : super._();
 
   factory _Doctor.fromJson(Map<String, dynamic> json) = _$_Doctor.fromJson;
 

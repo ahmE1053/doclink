@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../core/consts/outline_input_border.dart';
 
@@ -17,6 +18,8 @@ class MyTextField extends StatelessWidget {
     this.onChanged,
     this.onSubmitted,
     this.enabled = true,
+    this.maxLines,
+    this.formatters,
   });
 
   final TextEditingController controller;
@@ -28,10 +31,13 @@ class MyTextField extends StatelessWidget {
   final String label;
   final TextInputType inputType;
   final TextInputAction inputAction;
-
+  final int? maxLines;
+  final List<TextInputFormatter>? formatters;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      inputFormatters: formatters,
+      maxLines: maxLines,
       enabled: enabled,
       onFieldSubmitted: onSubmitted,
       onChanged: onChanged,
@@ -46,11 +52,12 @@ class MyTextField extends StatelessWidget {
         enabledBorder: outlineInputBorder(colorScheme.primaryContainer),
         disabledBorder: outlineInputBorder(Colors.grey),
         focusedErrorBorder: outlineInputBorder(colorScheme.error),
-        focusedBorder: outlineInputBorder(colorScheme.primaryContainer),
+        focusedBorder: outlineInputBorder(colorScheme.primary),
         suffixIcon: suffix,
         prefixIcon: prefixIcon,
         filled: true,
         fillColor: Colors.white,
+        alignLabelWithHint: true,
         labelText: label,
         prefixIconColor: colorScheme.primary,
       ),
@@ -63,5 +70,11 @@ extension EmailValidator on String {
     return RegExp(
             r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
         .hasMatch(this);
+  }
+}
+
+extension PhoneValidaton on String {
+  bool isPhoneValid() {
+    return RegExp(r'^(\+2)?01[0125]\d{8}$').hasMatch(this);
   }
 }

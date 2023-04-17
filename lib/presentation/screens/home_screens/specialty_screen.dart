@@ -37,7 +37,7 @@ class SpecialtyScreen extends ConsumerWidget {
                 return doctorsList.isEmpty
                     ? NotFound(
                         mq: mq,
-                        text: 'No doctors in here yet\n Mocking fucking sucks',
+                        text: 'No doctors in here yet',
                       )
                     : ListView.builder(
                         itemCount: doctorsList.length,

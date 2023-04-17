@@ -139,7 +139,7 @@ List<Map<String, dynamic>> doctors = [
     doctorState: DoctorState.available,
   ).toJson(),
   Doctor(
-    location: ClinicLocation(
+    location: const ClinicLocation(
       location: 'Mohandessin',
       coordinates: [30.052717, 31.205928],
     ),
@@ -477,7 +477,7 @@ Future<void> send() async {
   }
 }
 
-List<ClinicLocation> asshole = const [
+List<ClinicLocation> mockLocations = const [
   ClinicLocation(location: 'Cairo', coordinates: [30.049334, 31.233162]),
   ClinicLocation(location: 'Giza', coordinates: [30.013056, 31.208853]),
   ClinicLocation(location: 'Cairo', coordinates: [30.079102, 31.316054]),

@@ -1,5 +1,6 @@
 import 'package:doclink/core/providers/auth_provider.dart';
 import 'package:doclink/core/providers/state_providers.dart';
+import 'package:doclink/presentation/screens/home_screens/book_appointment.dart';
 import 'package:doclink/presentation/screens/home_screens/doctor_info_screen.dart';
 import 'package:doclink/presentation/screens/home_screens/favorite_doctors_screen.dart';
 import 'package:doclink/presentation/screens/home_screens/search_screen.dart';
@@ -203,204 +204,180 @@ final routes = [
       ),
     ),
     routes: [
-      GoRoute(
-        path: '/home',
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          transitionsBuilder: (__, animation, _, child) {
-            return FadeTransition(
-              opacity: animation,
-              child: child,
-            );
-          },
-          child: const HomeScreen(),
-        ),
-        routes: [
-          GoRoute(
-            path: 'doctor/:id',
-            pageBuilder: (context, state) => CustomTransitionPage(
-              transitionsBuilder: (__, animation, _, child) => FadeTransition(
-                opacity: animation,
-                child: child,
-              ),
-              child: DoctorInfoScreen(id: state.params['id']!),
-            ),
-          ),
-          GoRoute(
-            path: 'specialties',
-            pageBuilder: (context, state) => CustomTransitionPage(
-              transitionsBuilder: (__, animation, _, child) => FadeTransition(
-                opacity: animation,
-                child: child,
-              ),
-              child: const SpecialitiesScreen(),
-            ),
-            routes: [
-              GoRoute(
-                path: 'specialty/:specialty',
-                pageBuilder: (context, state) => CustomTransitionPage(
-                  transitionsBuilder: (__, animation, _, child) =>
-                      FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  ),
-                  child: SpecialtyScreen(
-                      specialtyName: state.params['specialty']!),
-                ),
-                routes: [
-                  GoRoute(
-                    path: 'doctor/:id',
-                    pageBuilder: (context, state) => CustomTransitionPage(
-                      transitionsBuilder: (__, animation, _, child) =>
-                          FadeTransition(
-                        opacity: animation,
-                        child: child,
-                      ),
-                      child: DoctorInfoScreen(id: state.params['id']!),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          GoRoute(
-            path: 'favorites',
-            pageBuilder: (context, state) => CustomTransitionPage(
-              transitionsBuilder: (__, animation, _, child) => FadeTransition(
-                opacity: animation,
-                child: child,
-              ),
-              child: const FavoriteDoctorsScreen(),
-            ),
-            routes: [
-              GoRoute(
-                path: 'doctor/:id',
-                pageBuilder: (context, state) => CustomTransitionPage(
-                  transitionsBuilder: (__, animation, _, child) =>
-                      FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  ),
-                  child: DoctorInfoScreen(id: state.params['id']!),
-                ),
-              ),
-            ],
-          ),
-          GoRoute(
-            path: 'specialty/:specialty',
-            pageBuilder: (context, state) => CustomTransitionPage(
-              transitionsBuilder: (__, animation, _, child) => FadeTransition(
-                opacity: animation,
-                child: child,
-              ),
-              child: SpecialtyScreen(specialtyName: state.params['specialty']!),
-            ),
-            routes: [
-              GoRoute(
-                path: 'doctor/:id',
-                pageBuilder: (context, state) => CustomTransitionPage(
-                  transitionsBuilder: (__, animation, _, child) =>
-                      FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  ),
-                  child: DoctorInfoScreen(id: state.params['id']!),
-                ),
-              ),
-            ],
-          ),
-          GoRoute(
-            path: 'search',
-            pageBuilder: (context, state) => CustomTransitionPage(
-              transitionsBuilder: (__, animation, _, child) => FadeTransition(
-                opacity: animation,
-                child: child,
-              ),
-              child: const SearchScreen(),
-            ),
-            routes: [
-              GoRoute(
-                path: 'doctor/:id',
-                pageBuilder: (context, state) => CustomTransitionPage(
-                  transitionsBuilder: (__, animation, _, child) =>
-                      FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  ),
-                  child: DoctorInfoScreen(id: state.params['id']!),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-      GoRoute(
-        path: '/appointments',
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          transitionsBuilder: (__, animation, _, child) {
-            return FadeTransition(
-              opacity: animation,
-              child: child,
-            );
-          },
-          child: const AppointmentsScreen(),
-        ),
-      ),
-      GoRoute(
-        path: '/messages',
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          transitionsBuilder: (__, animation, _, child) {
-            return FadeTransition(
-              opacity: animation,
-              child: child,
-            );
-          },
-          child: const MessagesScreen(),
-        ),
-      ),
-      GoRoute(
-        path: '/profile',
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          transitionsBuilder: (__, animation, _, child) {
-            return FadeTransition(
-              opacity: animation,
-              child: child,
-            );
-          },
-          child: const ProfileScreen(),
-        ),
-      ),
+      homeScreenRoute,
+      appointmentsScreenRoute,
+      messagesScreenRoute,
+      profileScreenRoute,
     ],
   ),
-  GoRoute(
-    path: '/auth',
-    pageBuilder: (context, state) => CustomTransitionPage(
-      key: state.pageKey,
-      child: const AuthBackgroundScreen(),
-      transitionsBuilder: (__, animation, _, child) {
-        return FadeTransition(
-          opacity: animation,
-          key: state.pageKey,
-          child: child,
-        );
-      },
-    ),
-  ),
-  GoRoute(
-    path: '/splash',
-    pageBuilder: (context, state) => CustomTransitionPage(
-      key: state.pageKey,
-      child: const SplashScreen(),
-      transitionsBuilder: (__, animation, _, child) {
-        return FadeTransition(
-          opacity: animation,
-          key: state.pageKey,
-          child: child,
-        );
-      },
-    ),
-  ),
+  authScreenRoute,
+  splashScreenRoute,
 ];
+
+final homeScreenRoute = GoRoute(
+  path: '/home',
+  pageBuilder: (context, state) => CustomTransitionPage(
+    key: state.pageKey,
+    transitionsBuilder: (__, animation, _, child) {
+      return FadeTransition(
+        opacity: animation,
+        child: child,
+      );
+    },
+    child: const HomeScreen(),
+  ),
+  routes: [
+    doctorScreenRoute,
+    specialtiesScreenRoute,
+    favoritesScreenRoute,
+    specialtyScreenRoute,
+    searchDoctorScreenRoute,
+  ],
+);
+
+final splashScreenRoute = GoRoute(
+  path: '/splash',
+  pageBuilder: (context, state) => CustomTransitionPage(
+    key: state.pageKey,
+    child: const SplashScreen(),
+    transitionsBuilder: (__, animation, _, child) {
+      return FadeTransition(
+        opacity: animation,
+        key: state.pageKey,
+        child: child,
+      );
+    },
+  ),
+);
+
+final authScreenRoute = GoRoute(
+  path: '/auth',
+  pageBuilder: (context, state) => CustomTransitionPage(
+    key: state.pageKey,
+    child: const AuthBackgroundScreen(),
+    transitionsBuilder: (__, animation, _, child) {
+      return FadeTransition(
+        opacity: animation,
+        key: state.pageKey,
+        child: child,
+      );
+    },
+  ),
+);
+
+final profileScreenRoute = GoRoute(
+  path: '/profile',
+  pageBuilder: (context, state) => CustomTransitionPage(
+    key: state.pageKey,
+    transitionsBuilder: (__, animation, _, child) {
+      return FadeTransition(
+        opacity: animation,
+        child: child,
+      );
+    },
+    child: const ProfileScreen(),
+  ),
+);
+
+final messagesScreenRoute = GoRoute(
+  path: '/messages',
+  pageBuilder: (context, state) => CustomTransitionPage(
+    key: state.pageKey,
+    transitionsBuilder: (__, animation, _, child) {
+      return FadeTransition(
+        opacity: animation,
+        child: child,
+      );
+    },
+    child: const MessagesScreen(),
+  ),
+);
+
+final appointmentsScreenRoute = GoRoute(
+  path: '/appointments',
+  pageBuilder: (context, state) => CustomTransitionPage(
+    key: state.pageKey,
+    transitionsBuilder: (__, animation, _, child) {
+      return FadeTransition(
+        opacity: animation,
+        child: child,
+      );
+    },
+    child: const AppointmentsScreen(),
+  ),
+);
+
+final specialtiesScreenRoute = GoRoute(
+  path: 'specialties',
+  pageBuilder: (context, state) => CustomTransitionPage(
+    transitionsBuilder: (__, animation, _, child) => FadeTransition(
+      opacity: animation,
+      child: child,
+    ),
+    child: const SpecialitiesScreen(),
+  ),
+  routes: [specialtyScreenRoute],
+);
+
+final searchDoctorScreenRoute = GoRoute(
+  path: 'search',
+  pageBuilder: (context, state) => CustomTransitionPage(
+    transitionsBuilder: (__, animation, _, child) => FadeTransition(
+      opacity: animation,
+      child: child,
+    ),
+    child: const SearchScreen(),
+  ),
+  routes: [doctorScreenRoute],
+);
+
+final doctorScreenRoute = GoRoute(
+  path: 'doctor/:id',
+  pageBuilder: (context, state) => CustomTransitionPage(
+    transitionsBuilder: (__, animation, _, child) => FadeTransition(
+      opacity: animation,
+      child: child,
+    ),
+    child: DoctorInfoScreen(id: state.params['id']!),
+  ),
+  routes: [
+    appointmentBookingScreenRoute,
+  ],
+);
+
+final specialtyScreenRoute = GoRoute(
+  path: 'specialty/:specialty',
+  pageBuilder: (context, state) => CustomTransitionPage(
+    transitionsBuilder: (__, animation, _, child) => FadeTransition(
+      opacity: animation,
+      child: child,
+    ),
+    child: SpecialtyScreen(specialtyName: state.params['specialty']!),
+  ),
+  routes: [doctorScreenRoute],
+);
+
+final favoritesScreenRoute = GoRoute(
+  path: 'favorites',
+  pageBuilder: (context, state) => CustomTransitionPage(
+    transitionsBuilder: (__, animation, _, child) => FadeTransition(
+      opacity: animation,
+      child: child,
+    ),
+    child: const FavoriteDoctorsScreen(),
+  ),
+  routes: [doctorScreenRoute],
+);
+
+final appointmentBookingScreenRoute = GoRoute(
+  path: 'bookingAppointments/:id',
+  pageBuilder: (context, state) => CustomTransitionPage(
+    child: BookAppointmentScreen(
+      id: state.params['id']!,
+    ),
+    transitionsBuilder: (__, animation, _, child) => FadeTransition(
+      opacity: animation,
+      child: child,
+    ),
+  ),
+);

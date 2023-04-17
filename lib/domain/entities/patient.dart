@@ -6,6 +6,7 @@ part 'patient.g.dart';
 
 @freezed
 class Patient with _$Patient {
+  @JsonSerializable(explicitToJson: true)
   const factory Patient({
     required String id,
     required String name,
@@ -20,33 +21,4 @@ class Patient with _$Patient {
 
   factory Patient.fromJson(Map<String, Object?> json) =>
       _$PatientFromJson(json);
-}
-
-@freezed
-class Appointments with _$Appointments {
-  const factory Appointments({
-    required String id,
-    required DateTime time,
-    required bool forAnotherPatient,
-    required AppointmentState appointmentState,
-    required AppointmentLocation appointmentLocation,
-    required String additionalInfo,
-    required String doctorId,
-    required Duration timeLeft,
-  }) = _Appointments;
-
-  factory Appointments.fromJson(Map<String, Object?> json) =>
-      _$AppointmentsFromJson(json);
-}
-
-enum AppointmentState {
-  coming,
-  done,
-  absent,
-  waitingForConfirmation,
-}
-
-enum AppointmentLocation {
-  online,
-  atClinic,
 }

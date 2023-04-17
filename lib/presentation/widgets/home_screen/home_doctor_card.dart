@@ -52,12 +52,9 @@ class HomeDoctorCard extends ConsumerWidget {
                       Expanded(
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(25),
-                          child: Hero(
-                            tag: doctor.id,
-                            child: CachedNetworkImage(
-                              imageUrl: doctor.imageUrl,
-                              fit: BoxFit.fill,
-                            ),
+                          child: CachedNetworkImage(
+                            imageUrl: doctor.imageUrl,
+                            fit: BoxFit.fill,
                           ),
                         ),
                       ),

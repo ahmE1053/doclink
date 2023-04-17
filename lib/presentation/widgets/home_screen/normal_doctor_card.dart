@@ -57,12 +57,9 @@ class NormalDoctorCard extends ConsumerWidget {
                         borderRadius: BorderRadius.circular(25),
                         child: AspectRatio(
                           aspectRatio: 1 / 1,
-                          child: Hero(
-                            tag: doctor.id,
-                            child: CachedNetworkImage(
-                              imageUrl: doctor.imageUrl,
-                              fit: BoxFit.fill,
-                            ),
+                          child: CachedNetworkImage(
+                            imageUrl: doctor.imageUrl,
+                            fit: BoxFit.fill,
                           ),
                         ),
                       ),

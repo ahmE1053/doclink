@@ -113,7 +113,8 @@ class __$$_ChatCopyWithImpl<$Res> extends _$ChatCopyWithImpl<$Res, _$_Chat>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$_Chat implements _Chat {
   const _$_Chat({required this.chatId, required this.chatMessage});
 

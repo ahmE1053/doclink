@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -19,10 +18,7 @@ void main() async {
   runApp(
     UncontrolledProviderScope(
       container: container,
-      child: DevicePreview(
-        enabled: false,
-        builder: (context) => const MyApp(),
-      ),
+      child: const MyApp(),
     ),
   );
 }
@@ -65,9 +61,6 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
-      useInheritedMediaQuery: true,
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
       themeMode: ThemeMode.light,
       theme: ThemeData(
         colorSchemeSeed: const Color(0xff7b50e7),
@@ -81,5 +74,14 @@ class MyApp extends ConsumerWidget {
       ),
       routerConfig: ref.watch(goRouterProvider),
     );
+  }
+}
+
+class Test extends StatelessWidget {
+  const Test({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }

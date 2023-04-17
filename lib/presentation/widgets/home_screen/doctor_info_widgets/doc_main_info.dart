@@ -27,12 +27,9 @@ class DocMainInfo extends StatelessWidget {
               borderRadius: BorderRadius.circular(25),
               child: Container(
                 color: const Color(0xfff4f3ef),
-                child: Hero(
-                  tag: doctor.id,
-                  child: CachedNetworkImage(
-                    imageUrl: doctor.imageUrl,
-                    fit: BoxFit.fill,
-                  ),
+                child: CachedNetworkImage(
+                  imageUrl: doctor.imageUrl,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
