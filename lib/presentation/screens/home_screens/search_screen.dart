@@ -6,8 +6,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../core/providers/state_providers.dart';
 import '../../../core/utilities/search_functions.dart';
 import '../../../data/data source/patient_remote_date_source.dart';
-import '../../widgets/home_screen/normal_doctor_card.dart';
-import '../../widgets/home_screen/not_found.dart';
+import '../../widgets/home_screen_related/normal_doctor_card.dart';
+import '../../widgets/home_screen_related/not_found.dart';
 import '../../widgets/search_text_field.dart';
 
 class SearchScreen extends HookConsumerWidget {
@@ -75,7 +75,7 @@ class SearchScreen extends HookConsumerWidget {
                           itemBuilder: (context, index) {
                             final doctor = results[index];
                             final isFav = patient.favoriteDoctors.contains(
-                              int.parse(doctor.id),
+                              doctor.id,
                             );
                             return NormalDoctorCard(
                               doctor: doctor,

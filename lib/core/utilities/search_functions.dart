@@ -1,9 +1,11 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doclink/data/data%20source/doctor_remote_data_source.dart';
 import 'package:doclink/domain/entities/doctor.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:uuid/uuid.dart';
 
 import '../providers/state_providers.dart';
 import 'specialties_map.dart';

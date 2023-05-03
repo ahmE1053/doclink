@@ -1,4 +1,5 @@
 import 'package:doclink/core/providers/book_appointment_provider.dart';
+import 'package:doclink/core/utilities/appointment_error_state.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -16,8 +17,10 @@ class AppointmentLocationTransitionHandler extends HookConsumerWidget {
     required this.doctor,
     required this.mq,
     required this.colorScheme,
+    required this.appointmentErrorState,
   }) : super(key: key);
   final Widget textInfo;
+  final AppointmentErrorState appointmentErrorState;
   final Doctor doctor;
   final ColorScheme colorScheme;
   final Size mq;
@@ -44,6 +47,10 @@ class AppointmentLocationTransitionHandler extends HookConsumerWidget {
           children: [
             Expanded(
               child: RadioListTile(
+                selectedTileColor: colorScheme.primaryContainer,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
                 title: Text(
                   'At clinic',
                   style: AppTypography.semiBodySize(context),
@@ -52,6 +59,8 @@ class AppointmentLocationTransitionHandler extends HookConsumerWidget {
                 groupValue: location.value,
                 onChanged: (value) {
                   final appointment = ref.read(bookAppointmentProvider);
+                  animationController.reverse();
+                  location.value = AppointmentLocation.atClinic;
                   ref.read(bookAppointmentProvider.notifier).copyWith(
                         appointment.copyWith(
                           time: '',
@@ -62,14 +71,16 @@ class AppointmentLocationTransitionHandler extends HookConsumerWidget {
                   ref
                       .read(selectedOnlineDayTimes.notifier)
                       .update((state) => []);
-                  animationController.reverse();
-                  location.value = AppointmentLocation.atClinic;
                 },
                 selected: location.value == AppointmentLocation.atClinic,
               ),
             ),
             Expanded(
               child: RadioListTile(
+                selectedTileColor: colorScheme.primaryContainer,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
                 title: Text(
                   'Online',
                   style: AppTypography.semiBodySize(context),
@@ -78,6 +89,8 @@ class AppointmentLocationTransitionHandler extends HookConsumerWidget {
                 groupValue: location.value,
                 onChanged: (value) {
                   final appointment = ref.read(bookAppointmentProvider);
+                  animationController.forward();
+                  location.value = AppointmentLocation.online;
                   ref.read(bookAppointmentProvider.notifier).copyWith(
                         appointment.copyWith(
                           time: '',
@@ -88,14 +101,13 @@ class AppointmentLocationTransitionHandler extends HookConsumerWidget {
                   ref
                       .read(selectedOfflineDayTimes.notifier)
                       .update((state) => null);
-                  animationController.forward();
-                  location.value = AppointmentLocation.online;
                 },
                 selected: location.value == AppointmentLocation.online,
               ),
-            ),
+            )
           ],
         ),
+        const SizedBox(height: 16),
         textInfo,
         const SizedBox(height: 16),
         Stack(
@@ -118,6 +130,7 @@ class AppointmentLocationTransitionHandler extends HookConsumerWidget {
                         );
                       }
                       return OfflineBookingDateSelector(
+                        errorState: appointmentErrorState,
                         mq: mq,
                         doctor: doctor,
                         colorScheme: colorScheme,
@@ -140,6 +153,7 @@ class AppointmentLocationTransitionHandler extends HookConsumerWidget {
                     );
                   }
                   return OnlineBookingDateSelector(
+                    errorState: appointmentErrorState,
                     mq: mq,
                     doctor: doctor,
                     colorScheme: colorScheme,

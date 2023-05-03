@@ -5,8 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/providers/state_providers.dart';
 import '../../../core/utilities/search_functions.dart';
-import '../../widgets/home_screen/not_found.dart';
-import '../../widgets/home_screen/specialty_card.dart';
+import '../../widgets/home_screen_related/not_found.dart';
+import '../../widgets/home_screen_related/specialty_card.dart';
 import '../../widgets/search_text_field.dart';
 
 class SpecialitiesScreen extends HookConsumerWidget {

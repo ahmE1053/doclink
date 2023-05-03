@@ -16,7 +16,7 @@ _$_Patient _$$_PatientFromJson(Map<String, dynamic> json) => _$_Patient(
           .map((e) => e as String)
           .toList(),
       favoriteDoctors: (json['favoriteDoctors'] as List<dynamic>)
-          .map((e) => e as int)
+          .map((e) => e as String)
           .toList(),
       dateOfBirth: DateTime.parse(json['dateOfBirth'] as String),
       imageUrl: json['imageUrl'] as String,

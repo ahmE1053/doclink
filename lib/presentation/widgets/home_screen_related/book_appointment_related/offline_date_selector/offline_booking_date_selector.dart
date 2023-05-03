@@ -1,11 +1,12 @@
-import 'package:doclink/presentation/widgets/home_screen/book_appointment_screen/offline_date_selector/clinic_hours_viewer.dart';
-import 'package:doclink/presentation/widgets/home_screen/book_appointment_screen/offline_date_selector/offline_day_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/providers/book_appointment_provider.dart';
+import '../../../../../core/utilities/appointment_error_state.dart';
 import '../../../../../domain/entities/doctor.dart';
-import '../online_date_selector/online_day_selector.dart';
+import '../../../../screens/home_screens/book_appointment.dart';
+import 'clinic_hours_viewer.dart';
+import 'offline_day_selector.dart';
 
 class OfflineBookingDateSelector extends ConsumerWidget {
   const OfflineBookingDateSelector({
@@ -13,8 +14,10 @@ class OfflineBookingDateSelector extends ConsumerWidget {
     required this.mq,
     required this.doctor,
     required this.colorScheme,
+    required this.errorState,
   }) : super(key: key);
   final Size mq;
+  final AppointmentErrorState errorState;
   final Doctor doctor;
   final ColorScheme colorScheme;
   @override
@@ -33,10 +36,14 @@ class OfflineBookingDateSelector extends ConsumerWidget {
                   DateTime.parse('2023-03-25').add(Duration(days: index));
               final dayInfoForBooking =
                   doctor.getDoctorAvailabilityForOfflineDay(day, selectedDay);
+              final timeState = (errorState.day &&
+                      dayInfoForBooking.timeState != TimeStates.disabled)
+                  ? TimeStates.error
+                  : dayInfoForBooking.timeState;
               return OfflineDaySelector(
                 day: day,
                 offlineDay: dayInfoForBooking.offlineAvailability,
-                state: dayInfoForBooking.timeState,
+                state: timeState,
               );
             },
           ),

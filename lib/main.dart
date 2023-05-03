@@ -14,7 +14,6 @@ void main() async {
   final container = ProviderContainer(observers: [
     const WatchingProviders(),
   ]);
-  final remoteDataSource = container.read(patientRemoteDataSourceProvider);
   runApp(
     UncontrolledProviderScope(
       container: container,

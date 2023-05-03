@@ -1,7 +1,6 @@
 import 'package:doclink/domain/entities/appointment.dart';
 import 'package:doclink/presentation/screens/home_screens/book_appointment.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:intl/intl.dart';
 
 part 'doctor.freezed.dart';
 
@@ -34,9 +33,9 @@ class Doctor with _$Doctor {
 
   OnlineDayInfoForAppointmentBooking getDoctorAvailabilityForOnlineDay(
       DateTime day, String selectedDay) {
-    final formattedCurrentDay = DateFormat.yMMMMd().format(day);
-    final onlineDateDays = availableOn.onlineAvailability!
-        .map((e) => DateFormat.yMMMMd().format(e.day));
+    final formattedCurrentDay = '$day'.split(' ')[0];
+    final onlineDateDays =
+        availableOn.onlineAvailability!.map((e) => '${e.day}'.split(' ')[0]);
     final isDayAvailable = onlineDateDays.contains(formattedCurrentDay);
     final timeState = isDayAvailable
         ? selectedDay == formattedCurrentDay
@@ -46,7 +45,7 @@ class Doctor with _$Doctor {
     final availability = isDayAvailable
         ? availableOn.onlineAvailability!
             .where((element) =>
-                DateFormat.yMMMMd().format(element.day) == formattedCurrentDay)
+                '${element.day}'.split(' ')[0] == formattedCurrentDay)
             .single
         : null;
     return OnlineDayInfoForAppointmentBooking(
@@ -57,9 +56,9 @@ class Doctor with _$Doctor {
 
   OfflineDayInfoForAppointmentBooking getDoctorAvailabilityForOfflineDay(
       DateTime day, String selectedDay) {
-    final formattedCurrentDay = DateFormat.yMMMMd().format(day);
-    final offlineDateDays = availableOn.offlineAvailability!
-        .map((e) => DateFormat.yMMMMd().format(e.day));
+    final formattedCurrentDay = '$day'.split(' ')[0];
+    final offlineDateDays =
+        availableOn.offlineAvailability!.map((e) => '${e.day}'.split(' ')[0]);
 
     final isDayAvailable = offlineDateDays.contains(formattedCurrentDay);
 
@@ -72,7 +71,7 @@ class Doctor with _$Doctor {
     final availability = isDayAvailable
         ? availableOn.offlineAvailability!
             .where((element) =>
-                DateFormat.yMMMMd().format(element.day) == formattedCurrentDay)
+                '${element.day}'.split(' ')[0] == formattedCurrentDay)
             .single
         : null;
     return OfflineDayInfoForAppointmentBooking(

@@ -1,10 +1,3 @@
-import 'package:doclink/core/providers/auth_provider.dart';
-import 'package:doclink/core/providers/state_providers.dart';
-import 'package:doclink/presentation/screens/home_screens/book_appointment.dart';
-import 'package:doclink/presentation/screens/home_screens/doctor_info_screen.dart';
-import 'package:doclink/presentation/screens/home_screens/favorite_doctors_screen.dart';
-import 'package:doclink/presentation/screens/home_screens/search_screen.dart';
-import 'package:doclink/presentation/screens/home_screens/specialty_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
@@ -12,7 +5,16 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../presentation/screen_export.dart';
 import '../../presentation/screens/auth_page_view/auth_background_screen.dart';
+import '../../presentation/screens/home_screens/book_appointment.dart';
+import '../../presentation/screens/home_screens/book_appointment_success.dart';
+import '../../presentation/screens/home_screens/doctor_info_screen.dart';
+import '../../presentation/screens/home_screens/favorite_doctors_screen.dart';
+import '../../presentation/screens/home_screens/search_screen.dart';
+import '../../presentation/screens/home_screens/specialty_screen.dart';
 import '../../presentation/screens/splash_screen.dart';
+import 'auth_provider.dart';
+import 'book_appointment_provider.dart';
+import 'state_providers.dart';
 
 part 'router_provider.freezed.dart';
 
@@ -61,6 +63,7 @@ class RouterHandlerNotifier extends Notifier<RouterHandler> {
     Future(() {
       goRouter.addListener(
         () {
+          print(goRouter.location);
           saveOldPageState(state.oldIndex);
         },
       );
@@ -87,16 +90,14 @@ class RouterHandlerNotifier extends Notifier<RouterHandler> {
         if (state.oldIndex == index) {
           ref.invalidate(homeSearchTextField);
           ref.invalidate(doctorSearchResults);
-
           ref.invalidate(specialtiesSearchTextField);
           ref.invalidate(specialtiesSearchResults);
+          ref.invalidate(bookAppointmentProvider);
           state = state.copyWith(homePagePath: '/home', currentIndex: index);
           goRouter.go(state.homePagePath);
           return;
         }
 
-        saveOldPageState(index);
-        goRouter.go(state.homePagePath);
         saveOldPageState(index);
         goRouter.go(state.homePagePath);
         break;
@@ -106,6 +107,7 @@ class RouterHandlerNotifier extends Notifier<RouterHandler> {
               appointmentsPagePath: '/appointments', currentIndex: index);
           return;
         }
+
         saveOldPageState(index);
         goRouter.go(state.appointmentsPagePath);
         break;
@@ -136,6 +138,10 @@ class RouterHandlerNotifier extends Notifier<RouterHandler> {
     goRouter.go('${goRouter.location}/$newPath');
   }
 
+  void enterFromPath(String path) {
+    goRouter.go(path);
+  }
+
   ///Saves the path of the page that the user was in before navigation
   ///If the page had any state like a text field or something there are
   ///providers that already keep track of it, only losing this state
@@ -145,21 +151,24 @@ class RouterHandlerNotifier extends Notifier<RouterHandler> {
     switch (state.oldIndex) {
       case (0):
         state = state.copyWith(
-            oldIndex: index,
-            homePagePath: goRouter.location,
-            currentIndex: index);
+          oldIndex: index,
+          homePagePath: goRouter.location,
+          currentIndex: index,
+        );
         break;
       case (1):
         state = state.copyWith(
-            appointmentsPagePath: goRouter.location,
-            oldIndex: index,
-            currentIndex: index);
+          appointmentsPagePath: goRouter.location,
+          oldIndex: index,
+          currentIndex: index,
+        );
         break;
       case (2):
         state = state.copyWith(
-            oldIndex: index,
-            messagesPagePath: goRouter.location,
-            currentIndex: index);
+          oldIndex: index,
+          messagesPagePath: goRouter.location,
+          currentIndex: index,
+        );
         break;
       case (3):
         state = state.copyWith(
@@ -185,7 +194,7 @@ final goRouterProvider = Provider<GoRouter>(
   (ref) {
     final authInfo = ref.read(authenticationProvider);
     return GoRouter(
-      initialLocation: authInfo == null ? '/auth' : '/home',
+      initialLocation: '/splash',
       routes: routes,
     );
   },
@@ -227,6 +236,7 @@ final homeScreenRoute = GoRoute(
     child: const HomeScreen(),
   ),
   routes: [
+    appointmentsSuccessScreenRoute,
     doctorScreenRoute,
     specialtiesScreenRoute,
     favoritesScreenRoute,
@@ -379,5 +389,19 @@ final appointmentBookingScreenRoute = GoRoute(
       opacity: animation,
       child: child,
     ),
+  ),
+);
+
+final appointmentsSuccessScreenRoute = GoRoute(
+  path: 'appointmentsSuccess',
+  pageBuilder: (context, state) => CustomTransitionPage(
+    key: state.pageKey,
+    transitionsBuilder: (__, animation, _, child) {
+      return FadeTransition(
+        opacity: animation,
+        child: child,
+      );
+    },
+    child: const BookAppointmentSuccessScreen(),
   ),
 );

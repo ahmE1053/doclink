@@ -12,11 +12,13 @@ class ReviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     return ListTile(
-      titleTextStyle: AppTypography.semiBodySize(context),
-      subtitleTextStyle: AppTypography.smallSize(context),
-      title: const Text('Anonymous'),
+      title: Text(
+        'Anonymous',
+        style: AppTypography.semiBodySize(context),
+      ),
       subtitle: Text(
         review.review,
+        style: AppTypography.smallSize(context),
       ),
       contentPadding: EdgeInsets.zero,
       trailing: Column(
@@ -35,9 +37,9 @@ class ReviewCard extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
+          const Expanded(
             child: FittedBox(
-              child: const Icon(
+              child: Icon(
                 Icons.star,
                 color: Colors.yellow,
               ),

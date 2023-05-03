@@ -5,9 +5,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../core/consts/app_typography.dart';
+import '../../../core/providers/book_appointment_provider.dart';
+import '../../../core/utilities/appointment_error_state.dart';
 import '../../../data/data source/doctor_remote_data_source.dart';
+import '../../../domain/entities/appointment.dart';
 import '../../widgets/authentication_handling_widgets/my_text_field_widget.dart';
-import '../../widgets/home_screen/book_appointment_screen/appointment_location_transition_handler.dart';
+import '../../widgets/home_screen_related/book_appointment_related/appointment_book_button.dart';
+import '../../widgets/home_screen_related/book_appointment_related/appointment_location_transition_handler.dart';
 
 class BookAppointmentScreen extends HookConsumerWidget {
   const BookAppointmentScreen({
@@ -24,28 +28,29 @@ class BookAppointmentScreen extends HookConsumerWidget {
     final formKey = useMemoized(() => GlobalKey<FormState>());
     final mq = MediaQuery.of(context).size;
     final colorScheme = Theme.of(context).colorScheme;
-
+    final errorState = useState(const AppointmentErrorState());
+    final bottomButtonSize = useState(mq.height * 0.07);
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
         FocusManager.instance.primaryFocus!.unfocus();
       },
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Book Appointment',
-          ),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(16),
-          child: ref.watch(doctorsNotifierProvider).when(
-                data: (doctorInfo) {
-                  final doctor = doctorInfo
-                      .where((doctorInfo) => doctorInfo.id == id)
-                      .single;
-                  return ListView(
+      child: ref.watch(doctorsNotifierProvider).when(
+            data: (doctorInfo) {
+              final doctor =
+                  doctorInfo.where((doctorInfo) => doctorInfo.id == id).single;
+              return Scaffold(
+                appBar: AppBar(
+                  title: const Text(
+                    'Book Appointment',
+                  ),
+                ),
+                body: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: ListView(
                     children: [
                       AppointmentLocationTransitionHandler(
+                        appointmentErrorState: errorState.value,
                         doctor: doctor,
                         colorScheme: colorScheme,
                         mq: mq,
@@ -91,29 +96,28 @@ class BookAppointmentScreen extends HookConsumerWidget {
                         ),
                       ),
                     ],
-                  );
-                },
-                error: (error, stackTrace) => const Center(
-                  child: Text('An error occurred, please try again later'),
+                  ),
                 ),
-                loading: () => Center(
-                  child: SpinKitFadingGrid(),
+                bottomNavigationBar: AppointmentBookButton(
+                  bottomButtonSize: bottomButtonSize,
+                  doctor: doctor,
+                  formKey: formKey,
+                  errorState: errorState,
+                  phoneController: phoneController,
+                  additionalInfoController: additionalInfoController,
+                  id: id,
                 ),
+              );
+            },
+            error: (_, __) => const Center(
+              child: Text('Error'),
+            ),
+            loading: () => Center(
+              child: SpinKitDualRing(
+                color: colorScheme.primary,
               ),
-        ),
-        bottomNavigationBar: SizedBox(
-          height: mq.height * 0.07,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                if (!formKey.currentState!.validate()) {}
-              },
-              child: const Text('Book'),
             ),
           ),
-        ),
-      ),
     );
   }
 }
@@ -122,4 +126,5 @@ enum TimeStates {
   selected,
   available,
   disabled,
+  error,
 }

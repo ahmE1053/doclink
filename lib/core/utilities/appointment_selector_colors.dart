@@ -19,5 +19,10 @@ Map colors(ColorScheme colorScheme) {
       'container': colorScheme.background,
       'border': colorScheme.primary,
     },
+    TimeStates.error: {
+      'text': colorScheme.error,
+      'container': colorScheme.background,
+      'border': colorScheme.error,
+    },
   };
 }

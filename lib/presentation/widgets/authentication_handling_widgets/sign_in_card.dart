@@ -4,53 +4,40 @@ class SigninCard extends StatelessWidget {
   const SigninCard({
     super.key,
     required this.icon,
-    required this.color,
-    required this.text,
+    required this.backgroundColor,
     required this.onTap,
+    required this.iconColor,
   });
 
-  final Color color;
-  final Widget icon;
-  final Widget text;
+  final Color backgroundColor, iconColor;
+  final IconData icon;
+
   final void Function() onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(25),
-        boxShadow: [
-          BoxShadow(
-              color: Colors.black54,
-              blurRadius: 3,
-              blurStyle: BlurStyle.normal,
-              offset: Offset(0, 1)),
-        ],
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            flex: 1,
-            child: FittedBox(
-              child: icon,
-            ),
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(1000),
+      child: Ink(
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          shape: BoxShape.circle,
+          boxShadow: const [
+            BoxShadow(
+                color: Colors.black54,
+                blurRadius: 3,
+                blurStyle: BlurStyle.normal,
+                offset: Offset(0, 1)),
+          ],
+        ),
+        padding: const EdgeInsets.all(10),
+        child: FittedBox(
+          child: Icon(
+            icon,
+            color: iconColor,
           ),
-          const SizedBox(
-            width: 5,
-          ),
-          Expanded(
-            flex: 7,
-            child: Padding(
-              padding: EdgeInsets.all(5),
-              child: FittedBox(
-                child: text,
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

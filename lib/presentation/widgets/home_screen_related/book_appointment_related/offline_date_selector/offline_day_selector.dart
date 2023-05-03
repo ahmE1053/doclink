@@ -39,10 +39,13 @@ class OfflineDaySelector extends ConsumerWidget {
           onTap: state == TimeStates.disabled
               ? null
               : () {
-                  final formattedDay = DateFormat.yMMMMd().format(day);
-                  final selectedDay = ref.read(bookAppointmentProvider).day;
+                  final formattedDay = '$day'.split(' ')[0];
+                  final appointment = ref.read(bookAppointmentProvider);
+                  final selectedDay = appointment.day;
                   if (selectedDay == formattedDay) {
-                    ref.read(bookAppointmentProvider.notifier).changeDay('');
+                    ref.read(bookAppointmentProvider.notifier).copyWith(
+                          appointment.copyWith(day: '', time: ''),
+                        );
                     ref
                         .read(selectedOfflineDayTimes.notifier)
                         .update((state) => null);
@@ -51,9 +54,10 @@ class OfflineDaySelector extends ConsumerWidget {
                   ref
                       .read(selectedOfflineDayTimes.notifier)
                       .update((state) => offlineDay);
-                  ref
-                      .read(bookAppointmentProvider.notifier)
-                      .changeDay(formattedDay);
+                  ref.read(bookAppointmentProvider.notifier).copyWith(
+                        appointment.copyWith(
+                            day: formattedDay, time: offlineDay!.timeFrom),
+                      );
                 },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),

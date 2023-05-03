@@ -1,14 +1,12 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../data/data source/doctor_remote_data_source.dart';
 import '../../../data/data source/patient_remote_date_source.dart';
-import '../../widgets/home_screen/normal_doctor_card.dart';
-import '../../widgets/home_screen/not_found.dart';
-import '../../widgets/home_screen/specialty_card.dart';
+import '../../widgets/home_screen_related/normal_doctor_card.dart';
+import '../../widgets/home_screen_related/not_found.dart';
+import '../../widgets/home_screen_related/specialty_card.dart';
 
 class SpecialtyScreen extends ConsumerWidget {
   const SpecialtyScreen({Key? key, required this.specialtyName})

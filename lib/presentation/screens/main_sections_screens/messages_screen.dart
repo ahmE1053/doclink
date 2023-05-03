@@ -6,7 +6,7 @@ class MessagesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Messages Screen')),
+      appBar: AppBar(title: const Text('Messages Screen')),
     );
   }
 }

@@ -11,9 +11,11 @@ class Patient with _$Patient {
     required String id,
     required String name,
     required DateTime joinedOn,
+    //only the ids for each of the following 3, not the entire objects
+    //each of those will be handled in the screen that require it to conserve memory
     required List<String> chatList,
     required List<String> appointments,
-    required List<int> favoriteDoctors,
+    required List<String> favoriteDoctors,
     required DateTime dateOfBirth,
     required String imageUrl,
     required String email,

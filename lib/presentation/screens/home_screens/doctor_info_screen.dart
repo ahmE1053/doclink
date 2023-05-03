@@ -1,16 +1,16 @@
-import 'package:doclink/core/providers/router_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/consts/app_typography.dart';
 import '../../../core/providers/book_appointment_provider.dart';
+import '../../../core/providers/router_provider.dart';
 import '../../../data/data source/doctor_remote_data_source.dart';
 import '../../../domain/entities/lat_lng.dart';
-import '../../widgets/home_screen/doctor_info_widgets/doc_info_appbar.dart';
-import '../../widgets/home_screen/doctor_info_widgets/doc_main_info.dart';
-import '../../widgets/home_screen/doctor_info_widgets/review_card.dart';
-import '../../widgets/home_screen/doctor_info_widgets/google_map_widget.dart';
+import '../../widgets/home_screen_related/doctor_info_widgets/doc_info_appbar.dart';
+import '../../widgets/home_screen_related/doctor_info_widgets/doc_main_info.dart';
+import '../../widgets/home_screen_related/doctor_info_widgets/review_card.dart';
+import '../../widgets/home_screen_related/doctor_info_widgets/google_map_widget.dart';
 
 class DoctorInfoScreen extends HookConsumerWidget {
   const DoctorInfoScreen({
@@ -25,74 +25,6 @@ class DoctorInfoScreen extends HookConsumerWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xfff6f6fa),
-      bottomNavigationBar: SizedBox(
-        height: mq.height * 0.12,
-        child: Container(
-          decoration: const BoxDecoration(color: Colors.white),
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                flex: 2,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        'Consultation Price',
-                        style: AppTypography.semiBodySize(
-                          context,
-                          colorScheme.outline,
-                        ),
-                      ),
-                    ),
-                    FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        '\$ 52',
-                        style: AppTypography.bodySize(
-                          context,
-                          colorScheme.outline,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 4),
-              Expanded(
-                flex: 3,
-                child: ElevatedButton(
-                  onPressed: () {
-                    ref.read(bookAppointmentProvider.notifier).changeDoctor(id);
-                    ref
-                        .read(routerHandlerProvider.notifier)
-                        .enterNewScreen('bookingAppointments/$id');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: colorScheme.primary,
-                    foregroundColor: colorScheme.onPrimary,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  child: FittedBox(
-                    child: Text(
-                      'Book Appointment',
-                      style: AppTypography.semiHeadlineSize(
-                        context,
-                        colorScheme.onPrimary,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
       body: ref.watch(doctorsNotifierProvider).when(
             data: (doctorInfo) {
               final doctor =
@@ -206,6 +138,74 @@ class DoctorInfoScreen extends HookConsumerWidget {
               child: SpinKitFadingGrid(),
             ),
           ),
+      bottomNavigationBar: SizedBox(
+        height: mq.height * 0.12,
+        child: Container(
+          decoration: const BoxDecoration(color: Colors.white),
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                flex: 2,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        'Consultation Price',
+                        style: AppTypography.semiBodySize(
+                          context,
+                          colorScheme.outline,
+                        ),
+                      ),
+                    ),
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        '\$ 52',
+                        style: AppTypography.bodySize(
+                          context,
+                          colorScheme.outline,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 4),
+              Expanded(
+                flex: 3,
+                child: ElevatedButton(
+                  onPressed: () {
+                    ref.read(bookAppointmentProvider.notifier).changeDoctor(id);
+                    ref
+                        .read(routerHandlerProvider.notifier)
+                        .enterNewScreen('bookingAppointments/$id');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: colorScheme.primary,
+                    foregroundColor: colorScheme.onPrimary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: FittedBox(
+                    child: Text(
+                      'Book Appointment',
+                      style: AppTypography.semiHeadlineSize(
+                        context,
+                        colorScheme.onPrimary,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

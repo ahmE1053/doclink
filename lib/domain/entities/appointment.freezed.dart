@@ -24,6 +24,8 @@ mixin _$Appointment {
   String get day => throw _privateConstructorUsedError;
   String get time => throw _privateConstructorUsedError;
   bool get forAnotherPatient => throw _privateConstructorUsedError;
+  bool get didLeaveReview => throw _privateConstructorUsedError;
+  bool get didLeaveCancellationReason => throw _privateConstructorUsedError;
   String get phoneNumber => throw _privateConstructorUsedError;
   AppointmentState get appointmentState => throw _privateConstructorUsedError;
   AppointmentLocation get appointmentLocation =>
@@ -49,6 +51,8 @@ abstract class $AppointmentCopyWith<$Res> {
       String day,
       String time,
       bool forAnotherPatient,
+      bool didLeaveReview,
+      bool didLeaveCancellationReason,
       String phoneNumber,
       AppointmentState appointmentState,
       AppointmentLocation appointmentLocation,
@@ -74,6 +78,8 @@ class _$AppointmentCopyWithImpl<$Res, $Val extends Appointment>
     Object? day = null,
     Object? time = null,
     Object? forAnotherPatient = null,
+    Object? didLeaveReview = null,
+    Object? didLeaveCancellationReason = null,
     Object? phoneNumber = null,
     Object? appointmentState = null,
     Object? appointmentLocation = null,
@@ -97,6 +103,14 @@ class _$AppointmentCopyWithImpl<$Res, $Val extends Appointment>
       forAnotherPatient: null == forAnotherPatient
           ? _value.forAnotherPatient
           : forAnotherPatient // ignore: cast_nullable_to_non_nullable
+              as bool,
+      didLeaveReview: null == didLeaveReview
+          ? _value.didLeaveReview
+          : didLeaveReview // ignore: cast_nullable_to_non_nullable
+              as bool,
+      didLeaveCancellationReason: null == didLeaveCancellationReason
+          ? _value.didLeaveCancellationReason
+          : didLeaveCancellationReason // ignore: cast_nullable_to_non_nullable
               as bool,
       phoneNumber: null == phoneNumber
           ? _value.phoneNumber
@@ -139,6 +153,8 @@ abstract class _$$_AppointmentCopyWith<$Res>
       String day,
       String time,
       bool forAnotherPatient,
+      bool didLeaveReview,
+      bool didLeaveCancellationReason,
       String phoneNumber,
       AppointmentState appointmentState,
       AppointmentLocation appointmentLocation,
@@ -162,6 +178,8 @@ class __$$_AppointmentCopyWithImpl<$Res>
     Object? day = null,
     Object? time = null,
     Object? forAnotherPatient = null,
+    Object? didLeaveReview = null,
+    Object? didLeaveCancellationReason = null,
     Object? phoneNumber = null,
     Object? appointmentState = null,
     Object? appointmentLocation = null,
@@ -185,6 +203,14 @@ class __$$_AppointmentCopyWithImpl<$Res>
       forAnotherPatient: null == forAnotherPatient
           ? _value.forAnotherPatient
           : forAnotherPatient // ignore: cast_nullable_to_non_nullable
+              as bool,
+      didLeaveReview: null == didLeaveReview
+          ? _value.didLeaveReview
+          : didLeaveReview // ignore: cast_nullable_to_non_nullable
+              as bool,
+      didLeaveCancellationReason: null == didLeaveCancellationReason
+          ? _value.didLeaveCancellationReason
+          : didLeaveCancellationReason // ignore: cast_nullable_to_non_nullable
               as bool,
       phoneNumber: null == phoneNumber
           ? _value.phoneNumber
@@ -223,6 +249,8 @@ class _$_Appointment implements _Appointment {
       required this.day,
       required this.time,
       required this.forAnotherPatient,
+      required this.didLeaveReview,
+      required this.didLeaveCancellationReason,
       required this.phoneNumber,
       required this.appointmentState,
       required this.appointmentLocation,
@@ -242,6 +270,10 @@ class _$_Appointment implements _Appointment {
   @override
   final bool forAnotherPatient;
   @override
+  final bool didLeaveReview;
+  @override
+  final bool didLeaveCancellationReason;
+  @override
   final String phoneNumber;
   @override
   final AppointmentState appointmentState;
@@ -256,7 +288,7 @@ class _$_Appointment implements _Appointment {
 
   @override
   String toString() {
-    return 'Appointment(id: $id, day: $day, time: $time, forAnotherPatient: $forAnotherPatient, phoneNumber: $phoneNumber, appointmentState: $appointmentState, appointmentLocation: $appointmentLocation, additionalInfo: $additionalInfo, doctorId: $doctorId, timeLeft: $timeLeft)';
+    return 'Appointment(id: $id, day: $day, time: $time, forAnotherPatient: $forAnotherPatient, didLeaveReview: $didLeaveReview, didLeaveCancellationReason: $didLeaveCancellationReason, phoneNumber: $phoneNumber, appointmentState: $appointmentState, appointmentLocation: $appointmentLocation, additionalInfo: $additionalInfo, doctorId: $doctorId, timeLeft: $timeLeft)';
   }
 
   @override
@@ -269,6 +301,12 @@ class _$_Appointment implements _Appointment {
             (identical(other.time, time) || other.time == time) &&
             (identical(other.forAnotherPatient, forAnotherPatient) ||
                 other.forAnotherPatient == forAnotherPatient) &&
+            (identical(other.didLeaveReview, didLeaveReview) ||
+                other.didLeaveReview == didLeaveReview) &&
+            (identical(other.didLeaveCancellationReason,
+                    didLeaveCancellationReason) ||
+                other.didLeaveCancellationReason ==
+                    didLeaveCancellationReason) &&
             (identical(other.phoneNumber, phoneNumber) ||
                 other.phoneNumber == phoneNumber) &&
             (identical(other.appointmentState, appointmentState) ||
@@ -291,6 +329,8 @@ class _$_Appointment implements _Appointment {
       day,
       time,
       forAnotherPatient,
+      didLeaveReview,
+      didLeaveCancellationReason,
       phoneNumber,
       appointmentState,
       appointmentLocation,
@@ -318,6 +358,8 @@ abstract class _Appointment implements Appointment {
       required final String day,
       required final String time,
       required final bool forAnotherPatient,
+      required final bool didLeaveReview,
+      required final bool didLeaveCancellationReason,
       required final String phoneNumber,
       required final AppointmentState appointmentState,
       required final AppointmentLocation appointmentLocation,
@@ -336,6 +378,10 @@ abstract class _Appointment implements Appointment {
   String get time;
   @override
   bool get forAnotherPatient;
+  @override
+  bool get didLeaveReview;
+  @override
+  bool get didLeaveCancellationReason;
   @override
   String get phoneNumber;
   @override

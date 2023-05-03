@@ -16,7 +16,7 @@ Future<Widget?> errorDialog(String errorText, BuildContext context) =>
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text('Ok'),
+            child: const Text('Ok'),
           )
         ],
       ),

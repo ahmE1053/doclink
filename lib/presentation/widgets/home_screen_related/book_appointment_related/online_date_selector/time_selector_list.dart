@@ -7,8 +7,9 @@ import '../../../../screens/home_screens/book_appointment.dart';
 import 'time_selector.dart';
 
 class TimeSelectorList extends HookConsumerWidget {
-  const TimeSelectorList({Key? key}) : super(key: key);
-
+  const TimeSelectorList({Key? key, required this.errorState})
+      : super(key: key);
+  final bool errorState;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedTime = ref.watch(bookAppointmentProvider).time;
@@ -36,12 +37,15 @@ class TimeSelectorList extends HookConsumerWidget {
               itemBuilder: (context, index) {
                 final dayTime = list[index];
                 final available = dayTime.available;
+                final timeState = (errorState && available)
+                    ? TimeStates.error
+                    : available
+                        ? selectedTime == dayTime.timeOfDay
+                            ? TimeStates.selected
+                            : TimeStates.available
+                        : TimeStates.disabled;
                 return TimeSelector(
-                  state: available
-                      ? selectedTime == dayTime.timeOfDay
-                          ? TimeStates.selected
-                          : TimeStates.available
-                      : TimeStates.disabled,
+                  state: timeState,
                   time: DateTime.parse('2000-01-02 ${dayTime.timeOfDay}:00'),
                 );
               },

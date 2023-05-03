@@ -4,33 +4,38 @@ import 'package:flutter/material.dart';
 class AppTypography {
   static TextStyle headlineSize(BuildContext context, [Color? color]) =>
       TextStyle(
-        fontSize: MediaQuery.of(context).size.width * 0.08,
+        fontSize: _getSize(context).width * 0.08,
         fontWeight: FontWeight.w800,
-        color: color ?? Colors.black,
+        color: color ?? _getColorScheme(context).onBackground,
       );
 
   static TextStyle semiHeadlineSize(BuildContext context, [Color? color]) =>
       TextStyle(
-        fontSize: MediaQuery.of(context).size.width * 0.065,
+        fontSize: _getSize(context).width * 0.065,
         fontWeight: FontWeight.w600,
-        color: color ?? Colors.black,
+        color: color ?? _getColorScheme(context).onBackground,
       );
 
   static TextStyle bodySize(BuildContext context, [Color? color]) => TextStyle(
-        fontSize: MediaQuery.of(context).size.width * 0.055,
-        color: color ?? Colors.black,
+        fontSize: _getSize(context).width * 0.055,
+        color: color ?? _getColorScheme(context).onBackground,
       );
 
   static TextStyle semiBodySize(BuildContext context, [Color? color]) =>
       TextStyle(
-        fontSize: MediaQuery.of(context).size.width * 0.04,
-        color: color ?? Colors.black,
+        fontSize: _getSize(context).width * 0.04,
+        color: color ?? _getColorScheme(context).onBackground,
         fontWeight: FontWeight.w300,
       );
 
   static TextStyle smallSize(BuildContext context, [Color? color]) => TextStyle(
-        fontSize: MediaQuery.of(context).size.width * 0.03,
+        fontSize: _getSize(context).width * 0.03,
         fontWeight: FontWeight.w300,
-        color: color ?? Colors.black,
+        color: color ?? _getColorScheme(context).onBackground,
       );
+
+  static ColorScheme _getColorScheme(BuildContext context) =>
+      Theme.of(context).colorScheme;
+
+  static Size _getSize(BuildContext context) => MediaQuery.of(context).size;
 }

@@ -96,39 +96,22 @@ class AuthBackgroundScreen extends HookConsumerWidget {
                 SizedBox(
                   height: mq.height * 0.05,
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const SizedBox(width: 20),
-                      Expanded(
-                        child: SigninCard(
-                          icon: const Icon(
-                            EvaIcons.google,
-                            color: Colors.black54,
-                          ),
-                          text: const Text(
-                            'Google',
-                            style: TextStyle(
-                              color: Colors.black54,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          color: Colors.white,
-                          onTap: () {},
-                        ),
+                      SigninCard(
+                        icon: EvaIcons.google,
+                        iconColor: colorScheme.primary,
+                        backgroundColor: Colors.white,
+                        onTap: () {},
                       ),
                       const SizedBox(width: 20),
-                      Expanded(
-                        child: SigninCard(
-                          color: Colors.blueAccent,
-                          text: const Text(
-                            'Facebook',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          icon: const Icon(
-                            EvaIcons.facebook,
-                            color: Colors.white,
-                          ),
-                          onTap: () {},
-                        ),
+                      SigninCard(
+                        iconColor: colorScheme.primary,
+                        backgroundColor: Colors.white,
+                        icon: EvaIcons.facebook,
+                        onTap: () {},
                       ),
                       const SizedBox(width: 20),
                     ],

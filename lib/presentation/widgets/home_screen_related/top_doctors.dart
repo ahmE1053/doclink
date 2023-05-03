@@ -3,7 +3,7 @@ import 'package:doclink/domain/entities/doctor.dart';
 
 List<Map<String, dynamic>> doctors = [
   Doctor(
-    location: ClinicLocation(
+    location: const ClinicLocation(
       location: 'Dokki',
       coordinates: [30.050238, 31.212539],
     ),
@@ -37,7 +37,7 @@ List<Map<String, dynamic>> doctors = [
     doctorState: DoctorState.available,
   ).toJson(),
   Doctor(
-    location: ClinicLocation(
+    location: const ClinicLocation(
       location: 'Dokki',
       coordinates: [30.045153, 31.209755],
     ),
@@ -71,7 +71,7 @@ List<Map<String, dynamic>> doctors = [
     doctorState: DoctorState.available,
   ).toJson(),
   Doctor(
-    location: ClinicLocation(
+    location: const ClinicLocation(
       location: 'Zamalek',
       coordinates: [30.064480, 31.221731],
     ),
@@ -105,7 +105,7 @@ List<Map<String, dynamic>> doctors = [
     doctorState: DoctorState.available,
   ).toJson(),
   Doctor(
-    location: ClinicLocation(
+    location: const ClinicLocation(
       location: 'Nasr City',
       coordinates: [30.066468, 31.342921],
     ),
@@ -173,7 +173,7 @@ List<Map<String, dynamic>> doctors = [
     doctorState: DoctorState.available,
   ).toJson(),
   Doctor(
-    location: ClinicLocation(
+    location: const ClinicLocation(
       location: 'Maadi',
       coordinates: [29.958800, 31.252556],
     ),
@@ -207,7 +207,7 @@ List<Map<String, dynamic>> doctors = [
     doctorState: DoctorState.available,
   ).toJson(),
   Doctor(
-    location: ClinicLocation(
+    location: const ClinicLocation(
       location: 'Heliopolis',
       coordinates: [30.086928, 31.343032],
     ),
@@ -241,7 +241,7 @@ List<Map<String, dynamic>> doctors = [
     doctorState: DoctorState.available,
   ).toJson(),
   Doctor(
-    location: ClinicLocation(
+    location: const ClinicLocation(
       location: 'Zamalek',
       coordinates: [30.063056, 31.224389],
     ),
@@ -275,7 +275,7 @@ List<Map<String, dynamic>> doctors = [
     doctorState: DoctorState.available,
   ).toJson(),
   Doctor(
-    location: ClinicLocation(
+    location: const ClinicLocation(
       location: 'Zamalek',
       coordinates: [30.064225, 31.224778],
     ),
@@ -309,7 +309,7 @@ List<Map<String, dynamic>> doctors = [
     doctorState: DoctorState.available,
   ).toJson(),
   Doctor(
-    location: ClinicLocation(
+    location: const ClinicLocation(
       location: 'Heliopolis',
       coordinates: [30.091728, 31.322606],
     ),
@@ -343,7 +343,7 @@ List<Map<String, dynamic>> doctors = [
     doctorState: DoctorState.available,
   ).toJson(),
   Doctor(
-    location: ClinicLocation(
+    location: const ClinicLocation(
       location: 'Maadi',
       coordinates: [29.966981, 31.250397],
     ),

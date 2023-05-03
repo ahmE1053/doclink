@@ -34,9 +34,9 @@ class PatientRemoteDataSource extends AsyncNotifier<Patient?> {
   * handles adding or removing a favorite doctor from the user list
   * */
 
-  Future<void> handleFavorite(int doctorId) async {
+  Future<void> handleFavorite(String doctorId) async {
     final patient = state.value!;
-    final List<int> favoriteDoctors = List.from(patient.favoriteDoctors);
+    final List<String> favoriteDoctors = List.from(patient.favoriteDoctors);
     final firestoreRef = FirebaseFirestore.instance.collection('patients').doc(
           patient.id,
         );
@@ -53,6 +53,10 @@ class PatientRemoteDataSource extends AsyncNotifier<Patient?> {
         favoriteDoctors: favoriteDoctors,
       ),
     );
+  }
+
+  void copyWith(Patient patient) {
+    state = AsyncValue.data(patient);
   }
 }
 

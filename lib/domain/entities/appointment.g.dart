@@ -12,6 +12,8 @@ _$_Appointment _$$_AppointmentFromJson(Map<String, dynamic> json) =>
       day: json['day'] as String,
       time: json['time'] as String,
       forAnotherPatient: json['forAnotherPatient'] as bool,
+      didLeaveReview: json['didLeaveReview'] as bool,
+      didLeaveCancellationReason: json['didLeaveCancellationReason'] as bool,
       phoneNumber: json['phoneNumber'] as String,
       appointmentState:
           $enumDecode(_$AppointmentStateEnumMap, json['appointmentState']),
@@ -28,6 +30,8 @@ Map<String, dynamic> _$$_AppointmentToJson(_$_Appointment instance) =>
       'day': instance.day,
       'time': instance.time,
       'forAnotherPatient': instance.forAnotherPatient,
+      'didLeaveReview': instance.didLeaveReview,
+      'didLeaveCancellationReason': instance.didLeaveCancellationReason,
       'phoneNumber': instance.phoneNumber,
       'appointmentState': _$AppointmentStateEnumMap[instance.appointmentState]!,
       'appointmentLocation':

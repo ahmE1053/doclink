@@ -11,9 +11,9 @@ class SplashScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Future.delayed(
-      const Duration(seconds: 3),
+      const Duration(seconds: 1),
       () => WidgetsBinding.instance.addPostFrameCallback(
-        (timeStamp) {
+        (_) {
           if (context.mounted) {
             ref.watch(patientRemoteDataSourceProvider).when(
                   data: (data) {

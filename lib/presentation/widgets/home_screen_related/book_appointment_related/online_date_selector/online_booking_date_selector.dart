@@ -1,16 +1,19 @@
-import 'package:doclink/presentation/widgets/home_screen/book_appointment_screen/online_date_selector/time_selector_list.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/consts/app_typography.dart';
 import '../../../../../core/providers/book_appointment_provider.dart';
+import '../../../../../core/utilities/appointment_error_state.dart';
 import '../../../../../domain/entities/doctor.dart';
+import '../../../../screens/home_screens/book_appointment.dart';
 import 'online_day_selector.dart';
+import 'time_selector_list.dart';
 
 class OnlineBookingDateSelector extends ConsumerWidget {
   const OnlineBookingDateSelector({
     super.key,
     required this.mq,
+    required this.errorState,
     required this.doctor,
     required this.colorScheme,
   });
@@ -18,6 +21,7 @@ class OnlineBookingDateSelector extends ConsumerWidget {
   final Size mq;
   final Doctor doctor;
   final ColorScheme colorScheme;
+  final AppointmentErrorState errorState;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -36,10 +40,14 @@ class OnlineBookingDateSelector extends ConsumerWidget {
                   DateTime.parse('2023-03-25').add(Duration(days: index));
               final dayInfoForBooking =
                   doctor.getDoctorAvailabilityForOnlineDay(day, selectedDay);
+              final timeState = (errorState.day &&
+                      dayInfoForBooking.timeState != TimeStates.disabled)
+                  ? TimeStates.error
+                  : dayInfoForBooking.timeState;
               return OnlineDaySelector(
                 day: day,
                 onlineDay: dayInfoForBooking.onlineAvailability,
-                state: dayInfoForBooking.timeState,
+                state: timeState,
               );
             },
           ),
@@ -53,7 +61,9 @@ class OnlineBookingDateSelector extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: 16),
-        const TimeSelectorList(),
+        TimeSelectorList(
+          errorState: errorState.time,
+        ),
       ],
     );
   }

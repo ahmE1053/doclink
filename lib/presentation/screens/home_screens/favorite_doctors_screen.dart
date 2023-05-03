@@ -1,14 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:doclink/data/data%20source/doctor_remote_data_source.dart';
-import 'package:doclink/data/data%20source/patient_remote_date_source.dart';
-import 'package:doclink/presentation/widgets/home_screen/normal_doctor_card.dart';
-import 'package:doclink/presentation/widgets/home_screen/not_found.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/consts/images.dart';
+import '../../../data/data source/doctor_remote_data_source.dart';
+import '../../../data/data source/patient_remote_date_source.dart';
+import '../../widgets/home_screen_related/normal_doctor_card.dart';
+import '../../widgets/home_screen_related/not_found.dart';
 
 class FavoriteDoctorsScreen extends HookConsumerWidget {
   const FavoriteDoctorsScreen({

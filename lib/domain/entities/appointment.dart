@@ -12,6 +12,8 @@ class Appointment with _$Appointment {
     required String day,
     required String time,
     required bool forAnotherPatient,
+    required bool didLeaveReview,
+    required bool didLeaveCancellationReason,
     required String phoneNumber,
     required AppointmentState appointmentState,
     required AppointmentLocation appointmentLocation,

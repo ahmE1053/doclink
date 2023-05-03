@@ -11,7 +11,6 @@ class MyCustomTextWidget extends ConsumerWidget {
   final TextStyle style;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // ref.watch();
     return Text(
       text,
       style: style,

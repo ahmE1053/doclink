@@ -87,6 +87,9 @@ class NormalDoctorCard extends ConsumerWidget {
                               ),
                               IconButton(
                                 onPressed: () async {
+                                  //used to avoid the snapping to no doctors in favorites widget.
+                                  //waits for the animation to complete then removes the doctor from the user
+                                  //favorites list.
                                   if (lastItem) {
                                     additionalFunction!();
                                     await Future.delayed(
@@ -100,7 +103,7 @@ class NormalDoctorCard extends ConsumerWidget {
                                               .notifier,
                                         )
                                         .handleFavorite(
-                                          int.parse(doctor.id),
+                                          doctor.id,
                                         );
                                     return;
                                   }
@@ -108,7 +111,7 @@ class NormalDoctorCard extends ConsumerWidget {
                                       .read(patientRemoteDataSourceProvider
                                           .notifier)
                                       .handleFavorite(
-                                        int.parse(doctor.id),
+                                        doctor.id,
                                       );
                                   if (additionalFunction != null) {
                                     additionalFunction!();

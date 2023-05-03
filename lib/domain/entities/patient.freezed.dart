@@ -22,10 +22,12 @@ Patient _$PatientFromJson(Map<String, dynamic> json) {
 mixin _$Patient {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  DateTime get joinedOn => throw _privateConstructorUsedError;
+  DateTime get joinedOn =>
+      throw _privateConstructorUsedError; //only the ids for each of the following 3, not the entire objects
+//each of those will be handled in the screen that require it to conserve memory
   List<String> get chatList => throw _privateConstructorUsedError;
   List<String> get appointments => throw _privateConstructorUsedError;
-  List<int> get favoriteDoctors => throw _privateConstructorUsedError;
+  List<String> get favoriteDoctors => throw _privateConstructorUsedError;
   DateTime get dateOfBirth => throw _privateConstructorUsedError;
   String get imageUrl => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
@@ -46,7 +48,7 @@ abstract class $PatientCopyWith<$Res> {
       DateTime joinedOn,
       List<String> chatList,
       List<String> appointments,
-      List<int> favoriteDoctors,
+      List<String> favoriteDoctors,
       DateTime dateOfBirth,
       String imageUrl,
       String email});
@@ -99,7 +101,7 @@ class _$PatientCopyWithImpl<$Res, $Val extends Patient>
       favoriteDoctors: null == favoriteDoctors
           ? _value.favoriteDoctors
           : favoriteDoctors // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<String>,
       dateOfBirth: null == dateOfBirth
           ? _value.dateOfBirth
           : dateOfBirth // ignore: cast_nullable_to_non_nullable
@@ -129,7 +131,7 @@ abstract class _$$_PatientCopyWith<$Res> implements $PatientCopyWith<$Res> {
       DateTime joinedOn,
       List<String> chatList,
       List<String> appointments,
-      List<int> favoriteDoctors,
+      List<String> favoriteDoctors,
       DateTime dateOfBirth,
       String imageUrl,
       String email});
@@ -179,7 +181,7 @@ class __$$_PatientCopyWithImpl<$Res>
       favoriteDoctors: null == favoriteDoctors
           ? _value._favoriteDoctors
           : favoriteDoctors // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<String>,
       dateOfBirth: null == dateOfBirth
           ? _value.dateOfBirth
           : dateOfBirth // ignore: cast_nullable_to_non_nullable
@@ -206,7 +208,7 @@ class _$_Patient implements _Patient {
       required this.joinedOn,
       required final List<String> chatList,
       required final List<String> appointments,
-      required final List<int> favoriteDoctors,
+      required final List<String> favoriteDoctors,
       required this.dateOfBirth,
       required this.imageUrl,
       required this.email})
@@ -223,7 +225,11 @@ class _$_Patient implements _Patient {
   final String name;
   @override
   final DateTime joinedOn;
+//only the ids for each of the following 3, not the entire objects
+//each of those will be handled in the screen that require it to conserve memory
   final List<String> _chatList;
+//only the ids for each of the following 3, not the entire objects
+//each of those will be handled in the screen that require it to conserve memory
   @override
   List<String> get chatList {
     if (_chatList is EqualUnmodifiableListView) return _chatList;
@@ -239,9 +245,9 @@ class _$_Patient implements _Patient {
     return EqualUnmodifiableListView(_appointments);
   }
 
-  final List<int> _favoriteDoctors;
+  final List<String> _favoriteDoctors;
   @override
-  List<int> get favoriteDoctors {
+  List<String> get favoriteDoctors {
     if (_favoriteDoctors is EqualUnmodifiableListView) return _favoriteDoctors;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_favoriteDoctors);
@@ -315,7 +321,7 @@ abstract class _Patient implements Patient {
       required final DateTime joinedOn,
       required final List<String> chatList,
       required final List<String> appointments,
-      required final List<int> favoriteDoctors,
+      required final List<String> favoriteDoctors,
       required final DateTime dateOfBirth,
       required final String imageUrl,
       required final String email}) = _$_Patient;
@@ -328,12 +334,13 @@ abstract class _Patient implements Patient {
   String get name;
   @override
   DateTime get joinedOn;
-  @override
+  @override //only the ids for each of the following 3, not the entire objects
+//each of those will be handled in the screen that require it to conserve memory
   List<String> get chatList;
   @override
   List<String> get appointments;
   @override
-  List<int> get favoriteDoctors;
+  List<String> get favoriteDoctors;
   @override
   DateTime get dateOfBirth;
   @override

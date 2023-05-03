@@ -1,23 +1,16 @@
-import 'dart:developer';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:doclink/core/utilities/search_functions.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:lottie/lottie.dart';
 
 import '../../../core/consts/app_typography.dart';
 import '../../../core/providers/router_provider.dart';
 import '../../../core/providers/state_providers.dart';
+import '../../../core/utilities/search_functions.dart';
 import '../../../core/utilities/specialties_map.dart';
 import '../../../data/data source/doctor_remote_data_source.dart';
-import '../../../domain/entities/doctor.dart';
-import '../../widgets/home_screen/home_doctor_card.dart';
-import '../../widgets/home_screen/specialty_card.dart';
-import '../../widgets/home_screen/top_doctors.dart';
+import '../../widgets/home_screen_related/home_doctor_card.dart';
+import '../../widgets/home_screen_related/specialty_card.dart';
 import '../../widgets/search_text_field.dart';
 
 class HomeScreen extends HookConsumerWidget {
@@ -30,7 +23,7 @@ class HomeScreen extends HookConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     final formKey = useMemoized(() => GlobalKey<FormState>());
-    print('hello this is a me mario');
+    print('hello it\'s a me mario');
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
@@ -38,7 +31,7 @@ class HomeScreen extends HookConsumerWidget {
       },
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
           child: Column(
             children: [
               SizedBox(

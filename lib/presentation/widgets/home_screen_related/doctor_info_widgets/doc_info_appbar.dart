@@ -31,7 +31,7 @@ class DocInfoAppBar extends StatelessWidget {
                 .value!
                 .favoriteDoctors
                 .contains(
-                  int.parse(doctor.id),
+                  doctor.id,
                 );
             return DocInfoIconButton(
               color: colorScheme.outline,
@@ -41,7 +41,7 @@ class DocInfoAppBar extends StatelessWidget {
                       patientRemoteDataSourceProvider.notifier,
                     )
                     .handleFavorite(
-                      int.parse(doctor.id),
+                      doctor.id,
                     );
               },
               icon: isFav ? Icons.favorite : Icons.favorite_border,

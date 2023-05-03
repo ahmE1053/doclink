@@ -37,7 +37,7 @@ class OnlineDaySelector extends ConsumerWidget {
           onTap: state == TimeStates.disabled
               ? null
               : () {
-                  final formattedDay = DateFormat.yMMMMd().format(day);
+                  final formattedDay = day.toString().split(' ')[0];
                   final selectedDay = ref.read(bookAppointmentProvider).day;
                   ref.read(bookAppointmentProvider.notifier).changeTime('');
                   if (selectedDay == formattedDay) {
